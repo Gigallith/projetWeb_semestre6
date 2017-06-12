@@ -7,6 +7,7 @@ import "rxjs/add/operator/catch";
 import { MessageModel } from "../../models/MessageModel";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { URLSERVER } from "shared/constants/urls";
+import {extractMessages} from "@angular/compiler/src/i18n/extractor_merger";
 
 @Injectable()
 export class MessageService {
@@ -75,7 +76,7 @@ export class MessageService {
 
     let finalPath = this.url + route;
 
-    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
+    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, finalPath));
 
   }
   /**
@@ -105,7 +106,15 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    console.log("bon je sais pas" + response.status);
-    return new MessageModel(); // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
+
+    this.http.get(route).subscribe((response) => this.extractAndUpdateMessageList(response));
+
+    return new MessageModel(
+      response.json().id,
+      response.json().content,
+      response.json().from,
+      response.json().createdAt,
+      response.json().updatedAt,
+      response.json().threadId);
   }
 }
