@@ -1,3 +1,7 @@
 h1 {
   text-align: center;
 }
+
+.block{
+  display: inline-block;
+}

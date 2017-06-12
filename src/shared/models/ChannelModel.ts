@@ -2,7 +2,7 @@
  * Classe représentant l'objet Chanel
  * Cet objet est renvoyé grâce à l'url /threads.
  */
-export class ChanelModel {
+export class ChannelModel {
 
   /**
    * Identifiant du chanel.

@@ -14,7 +14,7 @@ export class MessageListComponent implements OnInit {
   private route: string;
 
   constructor(private messageService: MessageService) {
-    this.route = "9/messages";
+    this.route = "139/messages";
   }
 
   /**
