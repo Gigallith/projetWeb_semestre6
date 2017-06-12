@@ -11,14 +11,14 @@ import { MessageModel } from "../../shared/models/MessageModel";
 export class MessageFormComponent implements OnInit {
 
   public message: MessageModel;
-  private username = "test";
+  private username = "paul";
   private route: string;
 
   constructor(private messageService: MessageService) {
-    this.message = new MessageModel(1, "Hello", this.username);
-    this.route = "1/messages";
+    this.message = new MessageModel(1, "", this.username);
+    this.route = "9/messages";
   }
-  
+
 
   ngOnInit() { }
 
