@@ -732,4 +732,4 @@ Documentation sur les Observables:
 - [Documentation Officielle rxjs](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html)
 - [Video Tutoriel débutant FR](http://www.meanjs.fr/rxjs-tutoriel-1-creer-un-observable/)
 - [Tutoriel FR](http://home.heeere.com/tech-intro-programmation-reactive.html)
->>>>>>> dcc2d60b5cf25285686d6361bc9e3148940c663c
+
