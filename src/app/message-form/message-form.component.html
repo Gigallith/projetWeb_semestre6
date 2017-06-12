@@ -1,0 +1,6 @@
+<p>
+  <input type="text" class="form-control" id="name" required  [(ngModel)]="message.content" name="name">
+  <button class="btn btn-primary" (click)="sendMessage()"> Send </button>
+
+  <br>Message model: {{message | json}}
+</p>
