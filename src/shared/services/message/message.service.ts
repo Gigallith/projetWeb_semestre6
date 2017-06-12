@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Response } from "@angular/http";
+import { Http, RequestOptions, Response, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
@@ -61,10 +61,23 @@ export class MessageService {
    * @param message
    */
   public sendMessage(route: string, message: MessageModel) {
-    // Je suis vide :(
-    // Tu peux trouver des infos sur moi dans le README !
-  }
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
 
+    let body = {
+      "id": message.id,
+      "content": message.content,
+      "from": message.from,
+      "createdAt": message.createdAt,
+      "updatedAt": message.updatedAt,
+      "threadId": message.threadId
+    };
+
+    let finalPath = this.url + route;
+
+    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
+
+  }
   /**
    * Fonction extractAndUpdateMessageList.
    * Cette fonction permet d'extraire la liste des messages de la 'response' reçue et ensuite de mettre à jour la liste
@@ -92,7 +105,7 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    // Je suis vide aussi ...
+    console.log("bon je sais pas" + response.status);
     return new MessageModel(); // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
 }
