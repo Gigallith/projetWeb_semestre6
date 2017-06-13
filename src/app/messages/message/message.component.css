@@ -1,7 +1,8 @@
 p {
-  color: white;
-  border: solid;
-  border-color: black;
+  color: black;
   border-radius: 10px;
-  background-color: royalblue;
+  background-color:rgb(229, 229, 234);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
 }

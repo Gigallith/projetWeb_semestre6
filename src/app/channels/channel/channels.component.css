@@ -1,3 +1,4 @@
+/*
 p {
   color: white;
   border: solid;
@@ -12,4 +13,13 @@ p {
 
 #deleteButton{
   background-color: #f44336;
+}
+*/
+
+li {
+  border: 0;
+}
+
+.container {
+  width: auto;
 }

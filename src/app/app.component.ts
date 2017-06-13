@@ -9,9 +9,11 @@ import { Observable } from "rxjs/Observable";
 export class AppComponent {
 
   public title: string;
+  public title2: string;
 
   constructor() {
     this.title = "Chat";
+    this.title2 = "Channels";
     Observable.create();
   }
 }

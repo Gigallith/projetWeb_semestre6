@@ -1,0 +1,39 @@
+p {
+  padding: 20px;
+}
+
+.btn-primary {
+  border: 0;
+  border-radius: 25px;
+  background: #1685B8;
+  margin: 5px 0;
+  padding: 12px 20px;
+  float: right;
+  width: 10%;
+}
+
+.btn-primary:active {
+  background-color: #1BA6E5;
+}
+
+input::-webkit-input-placeholder {
+  color: white !important;
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.form-control {
+  border: 0;
+  border-radius: 25px;
+  background: #1685B8;
+  margin: 5px 0;
+  padding: 12px 20px;
+  color: #FFFFFF;
+}
+
+#user {
+  float: left;
+  width: 88%;
+}

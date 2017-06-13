@@ -1,3 +1,4 @@
+<!--
 <br><div class="container container_color">
   <div class="row justify-content-md-start">
     <div class="col-md-3 card block">
@@ -7,6 +8,39 @@
     <div class="col-md-9 card block">
       <h1> {{title}} </h1>
       <app-message-list></app-message-list>
+      <app-message-form></app-message-form>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!--<br>
+<div class="card-deck" layout-align="center center">
+    <div class="card">
+      <app-channel-list></app-channel-list>
+    </div>
+    <div class="card">
+      <h1> {{title}} </h1>
+      <app-message-list></app-message-list>
+      <div class="card-footer">
+        <app-message-form></app-message-form>
+      </div>
+    </div>
+</div>-->
+
+<br>
+<div class="container" layout="row">
+  <div class="card channel" flex>
+    <h1> {{title2}} </h1>
+    <app-channel-list></app-channel-list>
+  </div>
+  <div class="card chat" flex>
+    <div class="card-header top">
+      <h1> {{title}} </h1>
+      <app-message-list></app-message-list>
+    </div>
+    <div class="card-footer form">
       <app-message-form></app-message-form>
     </div>
   </div>

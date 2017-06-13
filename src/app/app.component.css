@@ -2,6 +2,30 @@ h1 {
   text-align: center;
 }
 
-.block{
-  display: inline-block;
+.container {
+  justify-content: center;
+  display: flex;
+  width: 85%;
+}
+.card {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.card-footer {
+  background: #FFFFFF;
+  padding: 0;
+}
+
+.card-header {
+  padding: 30px;
+  background: #F5F5F5;
+}
+
+.channel {
+  padding: 30px 0;
+  flex-grow: 1;
+}
+
+.chat {
+  flex-grow: 3;
 }
