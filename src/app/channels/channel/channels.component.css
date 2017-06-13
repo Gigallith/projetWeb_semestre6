@@ -1,12 +1,11 @@
-li {
-  border: 0;
-}
+
 
 .container {
   width: auto;
 }
 
-.list-view {
+.list-element {
+  border: 0;
   top: 0;
   left: 0;
   bottom: 0;
@@ -16,7 +15,7 @@ li {
   transition: background 0.3s 0.1s;
 }
 
-li {
+#element {
   left: 0;
   right: 0;
   height: 70px;
@@ -26,6 +25,6 @@ li {
   transition: transform 0.3s, opacity 0.3s 0.3s, border-color 0.3s 0.3s;
 }
 
-li:hover {
+#element:hover {
   background: #efefef;
 }

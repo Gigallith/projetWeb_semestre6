@@ -19,7 +19,7 @@ export class ChannelListComponent implements OnInit {
 
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
-    Observable.interval(1000)
+    Observable.interval(5000)
       .subscribe( () => {
         this.updateList();
       });

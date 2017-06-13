@@ -17,4 +17,8 @@ export class ChannelsComponent implements OnInit {
   ngOnInit() {
   }
 
+  switchChannel(){
+    console.log(this.channel.name + "loool");
+  }
+
 }
