@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
+import {THREADPAGE} from "../../../shared/constants/urls";
 
 @Component({
   selector: 'app-channel-list',
@@ -16,7 +17,7 @@ export class ChannelListComponent implements OnInit {
   private route: string;
 
   constructor(private channelService: ChannelService) {
-    this.route = "?page=";
+    this.route = THREADPAGE;
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 import {ReplaySubject, Subscription} from "rxjs";
 import {ChannelModel} from "../../models/ChannelModel";
-import {URLSERVER} from "../../constants/urls";
+import {THREADPAGE, URLSERVER} from "../../constants/urls";
 /**
  * Created by Enzo on 12/06/2017.
  */
@@ -28,7 +28,7 @@ export class ChannelService {
   }
 
   private resetTab(){
-    this.finalTabList.length = 0;
+    this.finalTabList = [];
   }
 
   public getChannels(route: string, pageNum : number){
@@ -53,14 +53,14 @@ export class ChannelService {
     return this.http.get(finalUrl);
   }
 
-  extractAndUpdateChannelList(route : string) {
+  extractAndUpdateChannelList() {
     this.resetTab();
 
-    this.getChannels(route, 0);
+    this.getChannels(THREADPAGE, 0);
   }
 
   private extractChannelAndGetChannels(response : Response, route : string){
-    this.extractAndUpdateChannelList(route);
+    this.http.get(route).subscribe((response) => this.extractAndUpdateChannelList());
 
     return new ChannelModel(
       response.json().id,
@@ -68,5 +68,25 @@ export class ChannelService {
       response.json().createdAt,
       response.json().updatedAt
     )
+  }
+
+  public createChannel(route: string, channel: ChannelModel) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    let body = {
+      "name" : channel.name
+    };
+
+    let finalPath = this.url + route;
+
+    this.http.post(finalPath, body, options)
+      .subscribe(
+        (response) => this.extractChannelAndGetChannels(response, route)
+      ,(err) => {
+          if (err.status === 409){
+            alert("The channel " + channel.name + " already exists");
+          }
+        });
   }
 }
