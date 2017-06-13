@@ -2,18 +2,22 @@ p {
   padding: 20px;
 }
 
+.bottom {
+  display: inline-flex;
+  width: 100%;
+}
+
 .btn-primary {
   border: 0;
+  flex-grow: 1;
   border-radius: 25px;
-  background: #1685B8;
-  margin: 5px 0;
+  background: #218bf5;
+  margin: 5px 0 5px 5px;
   padding: 12px 20px;
-  float: right;
-  width: 10%;
 }
 
 .btn-primary:active {
-  background-color: #1BA6E5;
+  background-color: #49b3f6;
 }
 
 input::-webkit-input-placeholder {
@@ -27,13 +31,12 @@ input:focus::-webkit-input-placeholder {
 .form-control {
   border: 0;
   border-radius: 25px;
-  background: #1685B8;
+  background: #218bf5;
   margin: 5px 0;
   padding: 12px 20px;
   color: #FFFFFF;
 }
 
 #user {
-  float: left;
-  width: 88%;
+  flex-grow: 10;
 }
