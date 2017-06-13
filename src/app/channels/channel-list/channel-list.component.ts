@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {THREADPAGE} from "../../../shared/constants/urls";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-channel-list',
@@ -18,11 +19,19 @@ export class ChannelListComponent implements OnInit {
 
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
+    Observable.interval(1000)
+      .subscribe( () => {
+        this.updateList();
+      });
+  }
+
+  private updateList(){
+    this.channelService.extractAndUpdateChannelList();
+    this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
   }
 
   ngOnInit() {
-    this.channelService.getChannels(this.route, this.start_page);
-    this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
+    this.updateList()
   }
 
 }

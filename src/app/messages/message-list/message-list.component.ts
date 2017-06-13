@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { MessageService } from "../../../shared/services";
 import { MessageModel } from "../../../shared/models/MessageModel";
+import {Observable} from "rxjs";
 
 @Component({
   selector: "app-message-list",
@@ -15,6 +16,10 @@ export class MessageListComponent implements OnInit {
 
   constructor(private messageService: MessageService) {
     this.route = "350/messages";
+    Observable.interval(1000)
+      .subscribe( () => {
+        this.updateList();
+      });
   }
 
   /**
@@ -27,8 +32,12 @@ export class MessageListComponent implements OnInit {
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
   ngOnInit() {
+    this.updateList();
+  }
+
+  private updateList(){
     this.messageService.getMessages(this.route);
-    this.messageService.messageList$.subscribe((messages) => this.messageList = messages.reverse());
+    this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
 }

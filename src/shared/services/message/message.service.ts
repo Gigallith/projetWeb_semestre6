@@ -93,11 +93,13 @@ export class MessageService {
   extractAndUpdateMessageList(response: Response) {
     // Plus d'info sur Response ou sur la fonction .json()? si tu utilises Webstorm,
     // fait CTRL + Click pour voir la déclaration et la documentation
-    const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
+    let messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
 
     //modifie le contenu des messages pour ajouter les emoji
     this.emojiTransform(messageList);
+
+    messageList = messageList.reverse();
 
     this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
   }
