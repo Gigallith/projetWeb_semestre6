@@ -4,6 +4,7 @@
     <input type="text" class="form-control" id="user" required [(ngModel)]="message.from" name="user" (keyup.enter)="sendMessage()" placeholder="From">
     <button class="btn btn-primary" (click)="sendMessage()"> Send</button>
   </div>
-
-  <br>Message model: {{message | json}}
+  <div id="messageModel">
+    <br>Message model: {{message | json}}
+  </div>
 </div>
