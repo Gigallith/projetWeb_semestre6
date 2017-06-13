@@ -5,7 +5,7 @@ h1 {
 .container {
   justify-content: center;
   display: flex;
-  width: 85%;
+  width: 60%;
 }
 
 .card {
@@ -31,5 +31,13 @@ h1 {
   flex-grow: 3;
 }
 
-nav ul{height:800px; width:100%;}
-nav ul{overflow:hidden; overflow-y:scroll;}
+
+#channels {
+  height:1100px; width:100%;
+  overflow:hidden; overflow-y:scroll;
+}
+
+#messages {
+  height:900px; width:100%;
+  overflow:hidden; overflow-y:scroll;
+}

@@ -40,3 +40,5 @@ input:focus::-webkit-input-placeholder {
 #user {
   flex-grow: 10;
 }
+
+#messageModel{visibility: hidden}
