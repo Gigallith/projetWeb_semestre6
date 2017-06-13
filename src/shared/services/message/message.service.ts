@@ -1,13 +1,15 @@
-import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Response, Headers } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import {Injectable} from "@angular/core";
+import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { MessageModel } from "../../models/MessageModel";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { URLSERVER } from "shared/constants/urls";
+import {MessageModel} from "../../models/MessageModel";
+import {ReplaySubject} from "rxjs/ReplaySubject";
+import {URLSERVER} from "shared/constants/urls";
 import {extractMessages} from "@angular/compiler/src/i18n/extractor_merger";
+import {isNumber} from "util";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Injectable()
 export class MessageService {
@@ -79,6 +81,7 @@ export class MessageService {
     this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, finalPath));
 
   }
+
   /**
    * Fonction extractAndUpdateMessageList.
    * Cette fonction permet d'extraire la liste des messages de la 'response' reçue et ensuite de mettre à jour la liste
@@ -92,6 +95,10 @@ export class MessageService {
     // fait CTRL + Click pour voir la déclaration et la documentation
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
+
+    //modifie le contenu des messages pour ajouter les emoji
+    this.emojiTransform(messageList);
+
     this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
   }
 
@@ -117,4 +124,23 @@ export class MessageService {
       response.json().updatedAt,
       response.json().threadId);
   }
+
+  private emojiTransform(messageList) {
+
+    for (let i = 0; i < messageList.length; i++) {
+      //console.log('>>>>', messageList[i].content);
+      messageList[i].content = messageList[i].content.replace(/:\)/g, "😃");
+      messageList[i].content = messageList[i].content.replace(/;\)/g, "😉");
+      messageList[i].content = messageList[i].content.replace(/:'\(/g, "😢");
+      messageList[i].content = messageList[i].content.replace(/:\(/g, "🙁");
+      messageList[i].content = messageList[i].content.replace(/:D/g, "😄");
+      messageList[i].content = messageList[i].content.replace(/:p/g, "😄");
+      messageList[i].content = messageList[i].content.replace(/<3/g, "❤️");
+      messageList[i].content = messageList[i].content.replace(/:o/g, "😮");
+      messageList[i].content = messageList[i].content.replace(/O_O/g, "😳");
+    }
+
+  }
+
 }
+
