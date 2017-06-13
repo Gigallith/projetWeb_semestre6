@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, RequestOptions, Response, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
-import {ReplaySubject} from "rxjs";
+import {ReplaySubject, Subscription} from "rxjs";
 import {ChannelModel} from "../../models/ChannelModel";
 import {URLSERVER} from "../../constants/urls";
 /**
@@ -16,73 +16,51 @@ export class ChannelService {
 
   public static MAX_CHANNEL = 20;
 
+  private finalTabList : ChannelModel[];
+
   public channelList$: ReplaySubject<ChannelModel[]>;
 
   constructor(private http: Http) {
     this.url = URLSERVER;
-    this.channelList$ = new ReplaySubject(10);
+    this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel(1)]);
+    this.finalTabList = [];
   }
 
-  public getChannels(route: string, pageNum : number) : ChannelModel[]{
-    const finalUrl = this.url + route + pageNum;
+  private resetTab(){
+    this.finalTabList.length = 0;
+  }
 
-    let finalTabChannel: ChannelModel[];
-    finalTabChannel = [];
+  public getChannels(route: string, pageNum : number){
 
-    console.log(this.extractChannelByPage(route, 1).length);
+    this.extractChannelByPage(route, pageNum).subscribe((response) =>
+      {
+        this.finalTabList = this.finalTabList.concat(response.json());
 
-    this.http.get(finalUrl)
-      .subscribe((response) => {
-          finalTabChannel = finalTabChannel.concat(response.json());
-
-          /*
-          if (response.json().length == ChannelService.MAX_CHANNEL){
-
-            pageNum = pageNum + 1;
-            finalTabChannel = finalTabChannel.concat(this.getChannels(route, pageNum));
-
-            return finalTabChannel;
-          } else {
-
-            return finalTabChannel;
-          }
-          */
+        if (response.json().length == ChannelService.MAX_CHANNEL){
+          let tmp = pageNum + 1;
+          this.getChannels(route, tmp);
+        } else {
+          this.channelList$.next(this.finalTabList);
         }
-      );
-
-    return finalTabChannel;
+      }
+    );
   }
 
-  private extractChannelByPage(route: string, pageNum : number) : ChannelModel[] {
+  private extractChannelByPage(route: string, pageNum : number) : Observable<Response>{
     const finalUrl = this.url + route + pageNum;
 
-    let finalTabChannel: ChannelModel[] = [];
-
-    this.http.get(finalUrl)
-      .subscribe((response) => {
-        finalTabChannel = finalTabChannel.concat(response.json());
-
-        console.log("hop");
-
-        console.log("Nb : " + finalTabChannel.length);
-        console.log("hop");
-      });
-
-    console.log("Nb : " + finalTabChannel.length);
-
-    return finalTabChannel;
+    return this.http.get(finalUrl);
   }
 
+  extractAndUpdateChannelList(route : string) {
+    this.resetTab();
 
-  extractAndUpdateChannelList(response: Response) {
-    const channelList = response.json() || [];
-
-    this.channelList$.next(channelList);
+    this.getChannels(route, 0);
   }
 
   private extractChannelAndGetChannels(response : Response, route : string){
-    this.http.get(route).subscribe((response) => this.extractAndUpdateChannelList(response));
+    this.extractAndUpdateChannelList(route);
 
     return new ChannelModel(
       response.json().id,

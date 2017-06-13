@@ -10,6 +10,9 @@ import {ChannelService} from "../../../shared/services/channel/channel.service";
 export class ChannelListComponent implements OnInit {
 
   public channelList: ChannelModel[];
+
+  private start_page : number = 0;
+
   private route: string;
 
   constructor(private channelService: ChannelService) {
@@ -17,8 +20,7 @@ export class ChannelListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("yooo");
-    this.channelService.getChannels(this.route,0);
+    this.channelService.getChannels(this.route, this.start_page);
     this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
   }
 
