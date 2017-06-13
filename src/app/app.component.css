@@ -30,3 +30,6 @@ h1 {
 .chat {
   flex-grow: 3;
 }
+
+nav ul{height:800px; width:100%;}
+nav ul{overflow:hidden; overflow-y:scroll;}

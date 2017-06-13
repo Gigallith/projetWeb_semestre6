@@ -33,12 +33,20 @@
 <div class="container" layout="row">
   <div class="card channel" flex>
     <h1> {{title2}} </h1>
-    <app-channel-list></app-channel-list>
+    <nav>
+      <ul>
+        <app-channel-list></app-channel-list>
+      </ul>
+    </nav>
   </div>
   <div class="card chat" flex>
     <div class="card-header top">
       <h1> {{title}} </h1>
-      <app-message-list></app-message-list>
+      <nav>
+        <ul>
+          <app-message-list></app-message-list>
+        </ul>
+      </nav>
     </div>
     <div class="card-footer form">
       <app-message-form></app-message-form>
