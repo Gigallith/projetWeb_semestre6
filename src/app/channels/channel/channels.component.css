@@ -1,0 +1,15 @@
+p {
+  color: white;
+  border: solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: royalblue;
+}
+
+.block{
+  display: inline-block;
+}
+
+#deleteButton{
+  background-color: #f44336;
+}
