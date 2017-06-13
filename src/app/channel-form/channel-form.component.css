@@ -1,3 +1,35 @@
 .block{
   display: inline-block;
 }
+
+.container {
+  display: flex;
+  width: 85%;
+  margin-bottom: 2em;
+}
+
+.btn-primary {
+  border: 0;
+  flex-grow: 1;
+  border-radius: 25px;
+  background: #747474;
+
+}
+
+.form-control {
+  border: 1px solid #dedede;
+  border-radius: 25px;
+}
+
+.btn-primary:active {
+  background-color: #49b3f6;
+}
+
+
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+#nameChannel {
+  flex-grow: 1;
+}

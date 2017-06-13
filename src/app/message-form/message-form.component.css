@@ -1,15 +1,11 @@
-p {
-  padding: 20px;
-}
-
 .bottom {
-  display: inline-flex;
+  display: flex;
   width: 100%;
 }
 
 .btn-primary {
   border: 0;
-  flex-grow: 1;
+  flex: 1;
   border-radius: 25px;
   background: #218bf5;
   margin: 5px 0 5px 5px;
@@ -38,7 +34,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 #user {
-  flex-grow: 10;
+  flex: 9;
 }
 
 #messageModel{visibility: hidden}

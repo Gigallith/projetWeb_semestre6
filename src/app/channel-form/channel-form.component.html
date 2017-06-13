@@ -1,11 +1,5 @@
 <br>
 <div class="container">
-  <div class="row">
-    <div class="block col-md-7">
-    <input type="text" class="form-control" id="nameChannel" required [(ngModel)]="channel.name" name="name">
-  </div>
-    <div class="block col-md-5">
-    <button class="btn btn-primary" (click)="createChannel()"> Create </button>
-  </div>
-  </div>
+  <input type="text" class="form-control" id="nameChannel" required [(ngModel)]="channel.name" name="name" placeholder="Channel name">
+  <button class="btn btn-primary" (click)="createChannel()"> Create</button>
 </div>

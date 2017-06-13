@@ -1,28 +1,15 @@
-
-
-.container {
-  width: auto;
-}
-
 .list-element {
-  border: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 1);
-  z-index: 1;
-  transition: background 0.3s 0.1s;
+
 }
 
 #element {
-  left: 0;
-  right: 0;
-  height: 70px;
+  height: 5em;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
   border-bottom-width: 1px;
   border-style: solid;
   border-color: #ddd;
-  transition: transform 0.3s, opacity 0.3s 0.3s, border-color 0.3s 0.3s;
 }
 
 #element:hover {
