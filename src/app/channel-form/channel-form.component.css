@@ -1,4 +1,4 @@
-.block{
+.block {
   display: inline-block;
 }
 
@@ -24,7 +24,6 @@
 .btn-primary:active {
   background-color: #49b3f6;
 }
-
 
 input:focus::-webkit-input-placeholder {
   opacity: 0;

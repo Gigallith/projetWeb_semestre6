@@ -37,4 +37,6 @@ input:focus::-webkit-input-placeholder {
   flex: 9;
 }
 
-#messageModel{visibility: hidden}
+#messageModel {
+  visibility: hidden
+}
