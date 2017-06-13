@@ -13,9 +13,10 @@ export class MessageListComponent implements OnInit {
 
   public messageList: MessageModel[];
   private route: string;
+  public static channelID: number = 350;
 
   constructor(private messageService: MessageService) {
-    this.route = "350/messages";
+    this.route = "/messages";
     Observable.interval(1000)
       .subscribe( () => {
         this.updateList();
@@ -36,8 +37,11 @@ export class MessageListComponent implements OnInit {
   }
 
   private updateList(){
-    this.messageService.getMessages(this.route);
+    this.messageService.getMessages(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
+  static notifyChange(id: number) {
+    MessageListComponent.channelID = id;
+  }
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ChannelModel} from "../../../shared/models/ChannelModel";
+import {MessageListComponent} from "app/messages";
 
 @Component({
   selector: 'app-channels',
@@ -19,6 +20,7 @@ export class ChannelsComponent implements OnInit {
 
   switchChannel(){
     console.log(this.channel.name + "loool");
+    MessageListComponent.notifyChange(this.channel.id);
   }
 
 }
