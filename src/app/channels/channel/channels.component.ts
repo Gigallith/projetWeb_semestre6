@@ -19,7 +19,6 @@ export class ChannelsComponent implements OnInit {
   }
 
   switchChannel(){
-    console.log(this.channel.name + "loool");
     MessageListComponent.notifyChange(this.channel.id);
   }
 

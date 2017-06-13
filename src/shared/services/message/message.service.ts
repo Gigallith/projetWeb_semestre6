@@ -6,10 +6,11 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {MessageModel} from "../../models/MessageModel";
 import {ReplaySubject} from "rxjs/ReplaySubject";
-import {URLSERVER} from "shared/constants/urls";
+import {THREADPAGE, URLSERVER} from "shared/constants/urls";
 import {extractMessages} from "@angular/compiler/src/i18n/extractor_merger";
 import {isNumber} from "util";
 import {forEach} from "@angular/router/src/utils/collection";
+import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 
 @Injectable()
 export class MessageService {
@@ -20,6 +21,8 @@ export class MessageService {
    * La documentation des methodes du service permet d'avoir plus d'information concernant la façon d'accèder aux messages.
    */
   private url: string;
+
+  private finalTabList : MessageModel[];
 
   /**
    * MessageList$ est un type d'Observable particulier appelé ReplaySubject.
@@ -34,6 +37,11 @@ export class MessageService {
     this.url = URLSERVER;
     this.messageList$ = new ReplaySubject(1);
     this.messageList$.next([new MessageModel()]);
+    this.finalTabList = [];
+  }
+
+  private resetTab(){
+    this.finalTabList = [];
   }
 
   /**
@@ -46,10 +54,32 @@ export class MessageService {
    * @param route
    * @returns {Observable<R>}
    */
-  public getMessages(route: string) {
-    const finalUrl = this.url + route;
-    this.http.get(finalUrl)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+  public getMessages(route: string, index : number, max_num : number) {
+
+    this.extractMessagesByPage(route, index).subscribe(
+      (response) =>
+      {
+        this.finalTabList = this.finalTabList.concat(response.json());
+
+        if (index < max_num){
+          let tmp = index + 1;
+          this.getMessages(route, tmp, max_num);
+        } else {
+
+          this.emojiTransform(this.finalTabList);
+
+          this.finalTabList.reverse();
+
+          this.messageList$.next(this.finalTabList);
+        }
+      }
+    );
+  }
+
+  private extractMessagesByPage(route: string, pageNum : number) : Observable<Response>{
+    const finalUrl = this.url + route + THREADPAGE + pageNum;
+
+    return this.http.get(finalUrl);
   }
 
   /**
@@ -90,18 +120,10 @@ export class MessageService {
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
    * @param response
    */
-  extractAndUpdateMessageList(response: Response) {
-    // Plus d'info sur Response ou sur la fonction .json()? si tu utilises Webstorm,
-    // fait CTRL + Click pour voir la déclaration et la documentation
-    let messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
-    // messageList prendra la valeur tableau vide: [];
+  extractAndUpdateMessageList(route : string) {
+    this.resetTab();
 
-    //modifie le contenu des messages pour ajouter les emoji
-    this.emojiTransform(messageList);
-
-    messageList = messageList.reverse();
-
-    this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
+    this.getMessages(route ,0,MessageListComponent.max_page);
   }
 
   /**
@@ -116,7 +138,7 @@ export class MessageService {
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
 
-    this.http.get(route).subscribe((response) => this.extractAndUpdateMessageList(response));
+    this.http.get(route).subscribe((response) => this.extractAndUpdateMessageList(route));
 
     return new MessageModel(
       response.json().id,

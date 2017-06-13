@@ -13,8 +13,6 @@ export class ChannelListComponent implements OnInit {
 
   public channelList: ChannelModel[];
 
-  private start_page : number = 0;
-
   private route: string;
 
   constructor(private channelService: ChannelService) {

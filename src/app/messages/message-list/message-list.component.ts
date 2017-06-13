@@ -14,9 +14,11 @@ export class MessageListComponent implements OnInit {
   public messageList: MessageModel[];
   private route: string;
   public static channelID: number = 350;
+  public static max_page : number;
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
+    MessageListComponent.max_page = 0;
     Observable.interval(1000)
       .subscribe( () => {
         this.updateList();
@@ -36,12 +38,18 @@ export class MessageListComponent implements OnInit {
     this.updateList();
   }
 
+  private loadMoreMessages(){
+    MessageListComponent.max_page = MessageListComponent.max_page + 1;
+    this.updateList();
+  }
+
   private updateList(){
-    this.messageService.getMessages(MessageListComponent.channelID + this.route);
+    this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
   static notifyChange(id: number) {
     MessageListComponent.channelID = id;
+    MessageListComponent.max_page = 0;
   }
 }
