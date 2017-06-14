@@ -23,8 +23,7 @@ export class MessageFormComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   /**
    * Fonction pour envoyer un message.
@@ -54,7 +53,5 @@ export class MessageFormComponent implements OnInit {
 
   private resetFields() {
     this.message.content = "";
-
-    MessageListComponent.notifyChange(MessageListComponent.channelID);
   }
 }

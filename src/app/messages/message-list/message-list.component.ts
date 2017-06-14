@@ -25,6 +25,8 @@ export class MessageListComponent implements OnInit {
       .subscribe( () => {
         if (MessageListComponent.needToUpdate) {
           this.updateList();
+
+          MessageListComponent.needToUpdate = false;
         }
       });
   }
@@ -38,8 +40,7 @@ export class MessageListComponent implements OnInit {
    * En general, l'utilisation des services dans le NgOnInit est une bonne practice. Le constructeur ne doit servir qu'à
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   private loadMoreMessages(){
     MessageListComponent.max_page = MessageListComponent.max_page + 1;
@@ -49,8 +50,6 @@ export class MessageListComponent implements OnInit {
   private updateList(){
     this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
-
-    MessageListComponent.needToUpdate = false;
   }
 
   static notifyChange(id: number) {

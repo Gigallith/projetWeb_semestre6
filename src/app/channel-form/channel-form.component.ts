@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChannelModel} from "../../shared/models/ChannelModel";
 import {ChannelService} from "../../shared/services/channel/channel.service";
+import {ChannelListComponent} from "../channels/channel-list/channel-list.component";
 
 @Component({
   selector: 'app-channel-form',
@@ -22,6 +23,10 @@ export class ChannelFormComponent implements OnInit {
 
   createChannel(){
     this.channelService.createChannel(this.route, this.channel);
+
+    ChannelListComponent.update();
   }
+
+
 
 }

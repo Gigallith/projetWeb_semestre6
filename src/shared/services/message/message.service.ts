@@ -130,7 +130,7 @@ export class MessageService {
   extractAndUpdateMessageList(route : string) {
     this.resetTab();
 
-    this.getMessages(route ,0,MessageListComponent.max_page);
+    this.getMessages(route , 0, MessageListComponent.max_page);
   }
 
   /**
