@@ -51,6 +51,5 @@ export class MessageFormComponent implements OnInit {
 
   private resetFields() {
     this.message.content = "";
-    this.message.from = "";
   }
 }
