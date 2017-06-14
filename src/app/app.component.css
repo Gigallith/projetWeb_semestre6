@@ -26,11 +26,15 @@ h1 {
 }
 
 #channels {
-  height:1100px; width:90%;
-  overflow:hidden; overflow-y:scroll;
+  height: 1100px;
+  width: 90%;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 #messages {
-  height:900px; width:90%;
-  overflow:hidden; overflow-y:scroll;
+  height: 900px;
+  width: 90%;
+  overflow: hidden;
+  overflow-y: scroll;
 }

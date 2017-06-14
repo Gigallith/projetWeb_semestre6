@@ -1,8 +1,10 @@
 <div class="container">
-  <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" name="name" autofocus placeholder="Message">
+  <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" name="name" autofocus
+         placeholder="Message">
   <div class="bottom">
-    <input type="text" class="form-control" id="user" required [(ngModel)]="message.from" name="user" (keyup.enter)="sendMessage()" placeholder="From">
-    <button class="btn btn-primary" (click)="sendMessage()"> Send</button>
+    <input type="text" class="form-control" id="user" required [(ngModel)]="message.from" name="user"
+           (keyup.enter)="sendMessage()" placeholder="From">
+    <button class="btn btn-primary" (click)="sendMessage()">Send</button>
   </div>
   <div id="messageModel">
     <br>Message model: {{message | json}}
