@@ -29,7 +29,8 @@ export class MessageComponent implements OnInit {
    * pas dans le constructeur. Si vous souhaitez manipuler votre message lors du chargement du composant, vous devez
    * le faire dans le ngOnInit.
    */
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   checkfb(): boolean {
     const http_str = "https://www.youtube.com";
@@ -38,10 +39,10 @@ export class MessageComponent implements OnInit {
       const strposition = this.message.content.indexOf(http_str);
       this.urlyb = this.message.content.substr(strposition).split(" ")[0];
       //if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
-        this.urlyb = this.urlyb.replace("watch?v=", "embed/");
-        return true;
-      } else {
-        return false;
+      this.urlyb = this.urlyb.replace("watch?v=", "embed/");
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -62,26 +63,32 @@ export class MessageComponent implements OnInit {
     }
   }
 
-    checkImg(): boolean
-    {
+  checkImg(): boolean {
+    if (this.message.content != null) {
+
       const strposition = this.message.content.indexOf("http");
       this.urlImg = this.message.content.substr(strposition).split(" ")[0];
       if (strposition >= 0 && this.urlImg.indexOf("png") >= 0) {
         return true;
-      }
-      return (strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0);
-    }
-
-    checktw(): boolean
-    {
-      const http_str = "https://twitter.com";
-      if (this.message.content != null && this.message.content.includes(http_str)) {
-        const strposition = this.message.content.indexOf(http_str);
-        const url = this.message.content.substr(strposition).split(" ")[0];
-        this.urltw = "http://twitframe.com/show?url=" + url;
+      } else if (strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0) {
+        return true;
+      } else if (strposition >= 0 && this.urlImg.indexOf("jpg") >= 0) {
         return true;
       } else {
         return false;
       }
     }
   }
+
+  checktw(): boolean {
+    const http_str = "https://twitter.com";
+    if (this.message.content != null && this.message.content.includes(http_str)) {
+      const strposition = this.message.content.indexOf(http_str);
+      const url = this.message.content.substr(strposition).split(" ")[0];
+      this.urltw = "http://twitframe.com/show?url=" + url;
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
