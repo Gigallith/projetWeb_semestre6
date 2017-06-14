@@ -1,13 +1,14 @@
 <br>
-<div class="container" layout="row">
-  <div class="card channel" flex>
-    <h1> {{title2}} </h1>
-    <app-channel-form></app-channel-form>
-    <nav id="channels">
-      <app-channel-list></app-channel-list>
-    </nav>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-4 side" flex>
+      <h1> {{title2}} </h1>
+      <app-channel-form></app-channel-form>
+      <nav id="channels">
+        <app-channel-list></app-channel-list>
+      </nav>
   </div>
-  <div class="card chat" flex>
+  <div class="col-md-8 content" flex>
     <div class="card-header top">
       <h1> {{title}} </h1>
       <nav id="messages">
@@ -18,6 +19,7 @@
       <app-message-form></app-message-form>
     </div>
   </div>
-</div>
 
+</div>
+</div>
 

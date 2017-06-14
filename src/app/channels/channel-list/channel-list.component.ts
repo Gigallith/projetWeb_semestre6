@@ -15,15 +15,18 @@ export class ChannelListComponent implements OnInit {
   public channelList: ChannelModel[];
 
   private route: string;
+  public static needToUpdate: boolean = false;
 
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
-    /*
-    Observable.interval(5000)
+
+    Observable.interval(1000)
       .subscribe( () => {
-        this.updateList();
+        if (ChannelListComponent.needToUpdate) {
+          this.updateList();
+        }
       });
-      */
+
   }
 
   private updateList(){
@@ -31,17 +34,16 @@ export class ChannelListComponent implements OnInit {
     this.channelService.channelList$.subscribe((channels) => {
       this.channelList = channels;
     });
+    ChannelListComponent.needToUpdate = false;
   }
 
   ngOnInit() {
-    this.initList();
+    this.updateList();
   }
 
-  private initList() {
-    this.channelService.extractAndUpdateChannelList();
-    this.channelService.channelList$.subscribe((channels) => {
-      this.channelList = channels;
-    });
+
+  public static update(){
+    ChannelListComponent.needToUpdate = true;
   }
 
 }

@@ -1,27 +1,30 @@
+.container-fluid {
+  height:100%;
+}
+
 h1 {
   text-align: center;
 }
 
-.container {
+.row {
   justify-content: center;
+  margin: auto;
   display: flex;
-  width: 100%;
-}
-
-.card {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  position: relative;
+  width: 85%;
+  height: 100%
 }
 
 .card-header {
   padding: 2em;
 }
 
-.channel {
+.side {
   padding: 2em;
   flex: 1;
 }
 
-.chat {
+.content {
   flex: 2;
 }
 
