@@ -12,3 +12,6 @@
 <div *ngIf="checkImg()" style="display: inline-block"  >
   <img width="100%" height="100%" [src]=" urlImg " id="image">
 </div>
+<div *ngIf="checktw()">
+  <iframe width="320" height="440" [src]="urltw | safeResourceUrl" frameborder="0"></iframe>
+</div>
