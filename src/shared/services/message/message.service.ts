@@ -68,7 +68,13 @@ export class MessageService {
           this.finalTabList.reverse();
 
           this.messageList$.next(this.finalTabList);
+
+          // setTimeout(function() {
+          //   let element = document.getElementById('message');
+          //   element.scrollTop = element.scrollHeight;});
         }
+
+
       }
     );
   }
