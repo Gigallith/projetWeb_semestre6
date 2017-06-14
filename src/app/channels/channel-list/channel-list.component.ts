@@ -3,6 +3,7 @@ import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {THREADPAGE} from "../../../shared/constants/urls";
 import {Observable} from "rxjs";
+import {MessageListComponent} from "../../messages/message-list/message-list.component";
 
 @Component({
   selector: 'app-channel-list',
@@ -27,11 +28,20 @@ export class ChannelListComponent implements OnInit {
 
   private updateList(){
     this.channelService.extractAndUpdateChannelList();
-    this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
+    this.channelService.channelList$.subscribe((channels) => {
+      this.channelList = channels;
+    });
   }
 
   ngOnInit() {
-    this.updateList()
+    this.initList();
+  }
+
+  private initList() {
+    this.channelService.extractAndUpdateChannelList();
+    this.channelService.channelList$.subscribe((channels) => {
+      this.channelList = channels;
+    });
   }
 
 }

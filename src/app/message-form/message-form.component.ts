@@ -54,5 +54,7 @@ export class MessageFormComponent implements OnInit {
 
   private resetFields() {
     this.message.content = "";
+
+    MessageListComponent.notifyChange(MessageListComponent.channelID);
   }
 }

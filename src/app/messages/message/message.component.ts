@@ -31,7 +31,7 @@ export class MessageComponent implements OnInit {
   checkfb(): boolean {
     let http_str : string = "http";
 
-    if (this.message.content.includes(http_str)) {
+    if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlyb = this.message.content.substr(strposition).split(" ")[0];
       if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
@@ -46,7 +46,7 @@ export class MessageComponent implements OnInit {
   checkins(): boolean {
     let http_str : string = "http";
 
-    if (this.message.content.includes(http_str)) {
+    if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlins = this.message.content.substr(strposition).split(" ")[0];
       if (strposition >= 0 && this.urlins.indexOf("instagram") >= 0) {

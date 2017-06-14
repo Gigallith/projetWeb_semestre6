@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import {ReplaySubject, Subscription} from "rxjs";
 import {ChannelModel} from "../../models/ChannelModel";
 import {THREADPAGE, URLSERVER} from "../../constants/urls";
+import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 /**
  * Created by Enzo on 12/06/2017.
  */
@@ -42,6 +43,7 @@ export class ChannelService {
           this.getChannels(route, tmp);
         } else {
           this.channelList$.next(this.finalTabList);
+          MessageListComponent.notifyChange(this.finalTabList[0].id);
         }
       }
     );
@@ -88,5 +90,10 @@ export class ChannelService {
             alert("The channel " + channel.name + " already exists");
           }
         });
+  }
+
+  public selectFirstChannel() : number{
+
+    return this.finalTabList[0].id;
   }
 }

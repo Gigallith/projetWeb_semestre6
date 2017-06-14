@@ -11,14 +11,22 @@ import {Observable} from "rxjs";
 })
 export class MessageListComponent implements OnInit {
 
+  public static needToUpdate : boolean = false;
+
   public messageList: MessageModel[];
   private route: string;
-  public static channelID: number = 350;
+  public static channelID: number;
   public static max_page : number;
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
     MessageListComponent.max_page = 0;
+    Observable.interval(1000)
+      .subscribe( () => {
+        if (MessageListComponent.needToUpdate) {
+          this.updateList();
+        }
+      });
   }
 
   /**
@@ -31,7 +39,6 @@ export class MessageListComponent implements OnInit {
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
   ngOnInit() {
-    this.updateList();
   }
 
   private loadMoreMessages(){
@@ -42,10 +49,14 @@ export class MessageListComponent implements OnInit {
   private updateList(){
     this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
+
+    MessageListComponent.needToUpdate = false;
   }
 
   static notifyChange(id: number) {
     MessageListComponent.channelID = id;
     MessageListComponent.max_page = 0;
+
+    MessageListComponent.needToUpdate = true;
   }
 }
