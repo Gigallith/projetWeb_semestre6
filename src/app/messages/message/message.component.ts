@@ -29,26 +29,34 @@ export class MessageComponent implements OnInit {
   ngOnInit() { }
 
   checkfb(): boolean {
-    const strposition = this.message.content.indexOf("http");
-    this.urlyb = this.message.content.substr(strposition).split(" ")[0];
-    if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
-      this.urlyb = this.urlyb.replace("watch?v=" , "embed/");
-      return true;
-    } else {
-    return false;
+    let http_str : string = "http";
+
+    if (this.message.content.includes(http_str)) {
+      const strposition = this.message.content.indexOf(http_str);
+      this.urlyb = this.message.content.substr(strposition).split(" ")[0];
+      if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
+        this.urlyb = this.urlyb.replace("watch?v=", "embed/");
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
   checkins(): boolean {
-    const strposition = this.message.content.indexOf("http");
-    this.urlins = this.message.content.substr(strposition).split(" ")[0];
-    if (strposition >= 0 && this.urlins.indexOf("instagram") >= 0) {
+    let http_str : string = "http";
+
+    if (this.message.content.includes(http_str)) {
+      const strposition = this.message.content.indexOf(http_str);
+      this.urlins = this.message.content.substr(strposition).split(" ")[0];
+      if (strposition >= 0 && this.urlins.indexOf("instagram") >= 0) {
         const slashposition = this.urlins.lastIndexOf("/");
         this.urlins = this.urlins.substring(0, slashposition);
         this.urlins += "/embed";
-      return true;
-    } else {
-      return false;
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

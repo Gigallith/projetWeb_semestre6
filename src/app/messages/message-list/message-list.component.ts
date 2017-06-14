@@ -19,10 +19,6 @@ export class MessageListComponent implements OnInit {
   constructor(private messageService: MessageService) {
     this.route = "/messages";
     MessageListComponent.max_page = 0;
-    Observable.interval(1000)
-      .subscribe( () => {
-        this.updateList();
-      });
   }
 
   /**

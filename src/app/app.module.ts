@@ -13,9 +13,9 @@ import { ChannelListComponent } from './channels/channel-list/channel-list.compo
 import {ChannelService} from "../shared/services/channel/channel.service";
 import { ChannelFormComponent } from './channel-form/channel-form.component';
 import {TranslateService} from "../shared/services/translate/translate.service";
-import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
-
+import {ScheduleService} from "../shared/services/schedule/schedule.service";
 import {WeatherService} from "../shared/services/weather/weather.service";
+import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import {WeatherService} from "../shared/services/weather/weather.service";
     MessageService,
     ChannelService,
     TranslateService,
+    ScheduleService,
     WeatherService
   ],
   bootstrap: [AppComponent]

@@ -49,6 +49,8 @@ export class MessageService {
    *          un nombre entier correspondant à l'identifiant (id) du channel.
    * Exemple de route: 1/messages
    * @param route
+   * @param index
+   * @param max_num
    * @returns {Observable<R>}
    */
   public getMessages(route: string, index : number, max_num : number) {
@@ -95,15 +97,21 @@ export class MessageService {
    * - message: Le message à envoyer. Ce message est de type MessageModel.
    * @param route
    * @param message
+   * @param date
    */
-  public sendMessage(route: string, message: MessageModel) {
+  public sendMessage(route: string, message: MessageModel, date?: Date) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
     let body = {
       "content": message.content,
-      "from": message.from
+      "from": message.from,
+      "scheduledAt" : ""
     };
+
+    if (date != null){
+      body["scheduledAt"] = date.toISOString();
+    }
 
     let finalPath = this.url + route;
 
@@ -117,7 +125,7 @@ export class MessageService {
    * des message dans l'observable messageList$.
    * Elle est appelée dans la fonction getMessages et permet de directement récuperer une liste de MessageModel. Pour récupérer
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
-   * @param response
+   * @param route
    */
   extractAndUpdateMessageList(route : string) {
     this.resetTab();
