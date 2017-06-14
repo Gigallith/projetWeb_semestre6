@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { MessageService } from "../../shared/services";
-import { MessageModel } from "../../shared/models/MessageModel";
+import {MessageService} from "../../shared/services";
+import {MessageModel} from "../../shared/models/MessageModel";
 import {MessageListComponent} from "../messages/message-list/message-list.component";
 import {TranslateService} from "../../shared/services/translate/translate.service";
+import {WeatherService} from "../../shared/services/weather/weather.service";
 
 @Component({
   selector: "app-message-form",
@@ -15,13 +16,14 @@ export class MessageFormComponent implements OnInit {
   public message: MessageModel;
   private route: string;
 
-  constructor(private messageService: MessageService, private translateService : TranslateService) {
+  constructor(private messageService: MessageService, private translateService: TranslateService, private weatherService: WeatherService) {
     this.message = new MessageModel(1, "", "");
     this.route = "/messages";
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * Fonction pour envoyer un message.
@@ -34,9 +36,12 @@ export class MessageFormComponent implements OnInit {
 
     let tmp_array = this.message.content.split(" ")[0];
 
-    switch (tmp_array){
+    switch (tmp_array) {
       case "/trad":
         this.translateService.translateMessage(this.message, this.messageService, MessageListComponent.channelID + this.route);
+        break;
+      case "/meteo":
+        this.weatherService.sendWeather(this.message, this.messageService, MessageListComponent.channelID + this.route);
         break;
       default:
         break;
