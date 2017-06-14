@@ -9,8 +9,6 @@
 <div *ngIf="checkins()">
   <iframe width="320" height="440" [src]=" urlins | safeResourceUrl" frameborder="0"></iframe>
 </div>
-
-
-
-
-
+<div *ngIf="checkImg()" style="display: inline-block"  >
+  <img width="100%" height="100%" [src]=" urlImg " id="image">
+</div>
