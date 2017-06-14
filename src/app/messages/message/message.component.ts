@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 
-import { MessageModel } from "../../../shared/models/MessageModel";
+import {MessageModel} from "../../../shared/models/MessageModel";
 
 
 @Component({
@@ -11,13 +11,15 @@ import { MessageModel } from "../../../shared/models/MessageModel";
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
-   private fb: boolean;
-   private urlyb: string;
-   private urlins: string;
+  private fb: boolean;
+  private urlyb: string;
+  private urlins: string;
+  private urlImg: string;
 
   constructor() {
     this.message = new MessageModel(0, "Hello!");
   }
+
   /**
    * Fonction ngOnInit.
    * Cette fonction est appelée après l'execution de tous les constructeurs de toutes les classes typescript.
@@ -57,6 +59,18 @@ export class MessageComponent implements OnInit {
       } else {
         return false;
       }
+    }
+  }
+
+  checkImg(): boolean {
+    const strposition = this.message.content.indexOf("http");
+    this.urlImg = this.message.content.substr(strposition).split(" ")[0];
+    if (strposition >= 0 && this.urlImg.indexOf("png") >= 0) {
+      return true;
+    } else if(strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 
