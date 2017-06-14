@@ -15,8 +15,7 @@ export class ChannelsComponent implements OnInit {
     this.channel = new ChannelModel(0);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   switchChannel(){
     MessageListComponent.notifyChange(this.channel.id);

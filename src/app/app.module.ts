@@ -12,6 +12,7 @@ import { ChannelsComponent } from './channels/channel/channels.component';
 import { ChannelListComponent } from './channels/channel-list/channel-list.component';
 import {ChannelService} from "../shared/services/channel/channel.service";
 import { ChannelFormComponent } from './channel-form/channel-form.component';
+import {TranslateService} from "../shared/services/translate/translate.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ChannelFormComponent } from './channel-form/channel-form.component';
   ],
   providers: [
     MessageService,
-    ChannelService
+    ChannelService,
+    TranslateService
   ],
   bootstrap: [AppComponent]
 })

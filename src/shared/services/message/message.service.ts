@@ -7,9 +7,6 @@ import "rxjs/add/operator/catch";
 import {MessageModel} from "../../models/MessageModel";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {THREADPAGE, URLSERVER} from "shared/constants/urls";
-import {extractMessages} from "@angular/compiler/src/i18n/extractor_merger";
-import {isNumber} from "util";
-import {forEach} from "@angular/router/src/utils/collection";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 
 @Injectable()
@@ -98,17 +95,13 @@ export class MessageService {
     let options = new RequestOptions({headers: headers});
 
     let body = {
-      "id": message.id,
       "content": message.content,
-      "from": message.from,
-      "createdAt": message.createdAt,
-      "updatedAt": message.updatedAt,
-      "threadId": message.threadId
+      "from": message.from
     };
 
     let finalPath = this.url + route;
 
-    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, finalPath));
+    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
 
   }
 
@@ -137,8 +130,9 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
+    let finalPath = this.url + route;
 
-    this.http.get(route).subscribe((response) => this.extractAndUpdateMessageList(route));
+    this.http.get(finalPath).subscribe((response) => this.extractAndUpdateMessageList(route));
 
     return new MessageModel(
       response.json().id,
@@ -152,7 +146,6 @@ export class MessageService {
   private emojiTransform(messageList) {
 
     for (let i = 0; i < messageList.length; i++) {
-      //console.log('>>>>', messageList[i].content);
       messageList[i].content = messageList[i].content.replace(/:\)/g, "😃");
       messageList[i].content = messageList[i].content.replace(/;\)/g, "😉");
       messageList[i].content = messageList[i].content.replace(/:'\(/g, "😢");
@@ -163,8 +156,6 @@ export class MessageService {
       messageList[i].content = messageList[i].content.replace(/:o/g, "😮");
       messageList[i].content = messageList[i].content.replace(/O_O/g, "😳");
     }
-
   }
-
 }
 
