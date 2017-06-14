@@ -48,7 +48,6 @@ export class WeatherService {
     cityName = cityName.replace(/" "/g,"");
 
     let tmp_link: string = this.url + "data/2.5/weather?q=" + cityName + "&units=metric&appid=" + this.key;
-    console.log(tmp_link);
     return this.http.get(tmp_link);
   }
 

@@ -1,1 +1,8 @@
-
+#history {
+  border: 0;
+  flex: 1;
+  border-radius: 25px;
+  background: #218bf5;
+  margin: 5px 0 5px 5px;
+  padding: 12px 20px;
+}
