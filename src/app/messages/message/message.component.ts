@@ -31,8 +31,7 @@ export class MessageComponent implements OnInit {
   ngOnInit() { }
 
   checkfb(): boolean {
-    let http_str : string = "http";
-
+    const http_str: string = "http";
     if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlyb = this.message.content.substr(strposition).split(" ")[0];
@@ -46,8 +45,7 @@ export class MessageComponent implements OnInit {
   }
 
   checkins(): boolean {
-    let http_str : string = "http";
-
+    const http_str: string = "http";
     if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlins = this.message.content.substr(strposition).split(" ")[0];
@@ -67,11 +65,7 @@ export class MessageComponent implements OnInit {
     this.urlImg = this.message.content.substr(strposition).split(" ")[0];
     if (strposition >= 0 && this.urlImg.indexOf("png") >= 0) {
       return true;
-    } else if(strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0) {
-      return true;
-    } else {
-      return false;
-    }
+    } return(strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0);
   }
 
 
