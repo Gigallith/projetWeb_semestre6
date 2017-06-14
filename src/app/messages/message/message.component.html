@@ -4,6 +4,13 @@
 </p>
 
 <div *ngIf="checkfb()">
-  <iframe  class="youtube-player" [src]=" url | safeResourceUrl" frameborder="0" allowfullscreen></iframe>
+  <iframe  class="youtube-player" [src]=" urlyb | safeResourceUrl" frameborder="0" allowfullscreen></iframe>
 </div>
+<div *ngIf="checkins()">
+  <iframe width="320" height="440" [src]=" urlins | safeResourceUrl" frameborder="0"></iframe>
+</div>
+
+
+
+
 

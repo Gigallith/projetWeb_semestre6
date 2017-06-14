@@ -12,7 +12,8 @@ export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
    private fb: boolean;
-   private url: string;
+   private urlyb: string;
+   private urlins: string;
 
   constructor() {
     this.message = new MessageModel(0, "Hello!");
@@ -29,14 +30,27 @@ export class MessageComponent implements OnInit {
 
   checkfb(): boolean {
     const strposition = this.message.content.indexOf("http");
-    if (strposition >= 0 && this.message.content.indexOf("youtube") >= 0) {
-      this.url = this.message.content.substr(strposition);
-      this.url = this.url.split(" ")[0];
-      this.url = this.url.replace("watch?v=" , "embed/");
-    return true;
+    this.urlyb = this.message.content.substr(strposition).split(" ")[0];
+    if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
+      this.urlyb = this.urlyb.replace("watch?v=" , "embed/");
+      return true;
     } else {
     return false;
     }
   }
+
+  checkins(): boolean {
+    const strposition = this.message.content.indexOf("http");
+    this.urlins = this.message.content.substr(strposition).split(" ")[0];
+    if (strposition >= 0 && this.urlins.indexOf("instagram") >= 0) {
+        const slashposition = this.urlins.lastIndexOf("/");
+        this.urlins = this.urlins.substring(0, slashposition);
+        this.urlins += "/embed";
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 }
