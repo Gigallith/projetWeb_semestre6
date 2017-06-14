@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 
 import { MessageModel } from "../../../shared/models/MessageModel";
 
+
 @Component({
   selector: "app-message",
   templateUrl: "./message.component.html",
@@ -10,6 +11,8 @@ import { MessageModel } from "../../../shared/models/MessageModel";
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
+   private fb: boolean;
+   private url: string;
 
   constructor() {
     this.message = new MessageModel(0, "Hello!");
@@ -23,5 +26,17 @@ export class MessageComponent implements OnInit {
    * le faire dans le ngOnInit.
    */
   ngOnInit() { }
+
+  checkfb(): boolean {
+    const strposition = this.message.content.indexOf("http");
+    if (strposition >= 0 && this.message.content.indexOf("youtube") >= 0) {
+      this.url = this.message.content.substr(strposition);
+      this.url = this.url.split(" ")[0];
+      this.url = this.url.replace("watch?v=" , "embed/");
+    return true;
+    } else {
+    return false;
+    }
+  }
 
 }

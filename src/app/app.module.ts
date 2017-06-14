@@ -8,11 +8,13 @@ import { AppComponent } from "./app.component";
 import { MessageComponent, MessageListComponent } from "./messages";
 import { MessageFormComponent } from "./message-form";
 import { MessageService } from "../shared/services/message/message.service";
-import { ChannelsComponent } from './channels/channel/channels.component';
-import { ChannelListComponent } from './channels/channel-list/channel-list.component';
+import { ChannelsComponent } from "./channels/channel/channels.component";
+import { ChannelListComponent } from "./channels/channel-list/channel-list.component";
 import {ChannelService} from "../shared/services/channel/channel.service";
-import { ChannelFormComponent } from './channel-form/channel-form.component';
+import { ChannelFormComponent } from "./channel-form/channel-form.component";
 import {TranslateService} from "../shared/services/translate/translate.service";
+import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {TranslateService} from "../shared/services/translate/translate.service";
     MessageComponent,
     ChannelsComponent,
     ChannelListComponent,
-    ChannelFormComponent
+    ChannelFormComponent,
+    SafeResourceUrl
   ],
   imports: [
     BrowserModule,
