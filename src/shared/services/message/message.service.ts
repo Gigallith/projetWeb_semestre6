@@ -103,6 +103,7 @@ export class MessageService {
     const options = new RequestOptions({headers: headers});
 
     const body = {
+      "id" : message.id,
       "content": message.content,
       "from": message.from,
       "scheduledAt": ""

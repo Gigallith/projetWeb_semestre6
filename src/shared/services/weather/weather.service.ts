@@ -12,12 +12,12 @@ export class WeatherService {
   private url: string;
   private key: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private messageService: MessageService) {
     this.url = URLWEATHER;
     this.key = WEATHERKEY;
   }
 
-  public sendWeather(message: MessageModel, messageService: MessageService, path: string) {
+  public sendWeather(message: MessageModel, path: string) {
     const tmp_array = message.content.split(" ");
 
     if (this.isCommandToWeather(tmp_array)) {
@@ -31,7 +31,6 @@ export class WeatherService {
         const tmp_content = "Voici la météo de " + response.json().name + ": \n" +
           "Temps : " + response.json().weather[0].description + "  ,\n" +
           "Température : " + response.json().main.temp + "°C, \n" +
-          // "elles varient entre : " +response.json().main.temp_min + "°C et " + response.json().main.temp_max + "°C \n" +
           "Vent : " + response.json().wind.speed + "m/s, \n" +
           "Humidité : " + response.json().main.humidity + "% \n";
 
@@ -40,7 +39,7 @@ export class WeatherService {
         tmp_message.content = tmp_content;
         tmp_message.from = "mrmeteo";
 
-        messageService.sendMessage(path, tmp_message);
+        this.messageService.sendMessage(path, tmp_message);
 
         message.from = user_name;
         message.content = "";

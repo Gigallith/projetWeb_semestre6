@@ -38,13 +38,13 @@ export class MessageFormComponent implements OnInit {
 
     switch (tmp_array) {
       case "/trad":
-        this.translateService.translateMessage(this.message, this.messageService, MessageListComponent.channelID + this.route);
+        this.translateService.translateMessage(this.message, MessageListComponent.channelID + this.route);
         break;
       case "/schedule":
-        this.schedulerService.scheduleMessage(this.message, this.messageService, MessageListComponent.channelID + this.route);
+        this.schedulerService.scheduleMessage(this.message, MessageListComponent.channelID + this.route);
         break;
       case "/meteo":
-        this.weatherService.sendWeather(this.message, this.messageService, MessageListComponent.channelID + this.route);
+        this.weatherService.sendWeather(this.message, MessageListComponent.channelID + this.route);
         break;
       default:
         this.messageService.sendMessage(MessageListComponent.channelID + this.route, this.message);

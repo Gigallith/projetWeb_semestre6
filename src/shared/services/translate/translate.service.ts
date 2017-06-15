@@ -11,11 +11,11 @@ export class TranslateService {
 
   private url: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private messageService: MessageService) {
     this.url = URLTRANSLATE;
   }
 
-  public translateMessage(message: MessageModel, messageService: MessageService, path: string) {
+  public translateMessage(message: MessageModel, path: string) {
     const tmp_array = message.content.split(" ");
 
     if (this.isCommandToTranslate(tmp_array)) {
@@ -28,7 +28,7 @@ export class TranslateService {
         tmp_message.content = response.json().translationText;
         tmp_message.from = "translatebot";
 
-        messageService.sendMessage(path, tmp_message);
+        this.messageService.sendMessage(path, tmp_message);
 
         message.from = user_name;
         message.content = "";
