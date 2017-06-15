@@ -68,11 +68,11 @@ export class MessageComponent implements OnInit {
 
       const strposition = this.message.content.indexOf("http");
       this.urlImg = this.message.content.substr(strposition).split(" ")[0];
-      if (strposition >= 0 && this.urlImg.indexOf("png") >= 0) {
+      if (strposition >= 0 && this.urlImg.indexOf(".png") >= 0) {
         return true;
-      } else if (strposition >= 0 && this.urlImg.indexOf("jpeg") >= 0) {
+      } else if (strposition >= 0 && this.urlImg.indexOf(".jpeg") >= 0) {
         return true;
-      } else if (strposition >= 0 && this.urlImg.indexOf("jpg") >= 0) {
+      } else if (strposition >= 0 && this.urlImg.indexOf(".jpg") >= 0) {
         return true;
       } else {
         return false;
