@@ -90,7 +90,7 @@ export class ScheduleService {
 
     let translateText = "";
 
-    for (let i = 4; i < tmp_array.length; i++) {
+    for (let i = ScheduleService.min_num_arg - 1; i < tmp_array.length; i++) {
       translateText = translateText + tmp_array[i];
 
       if (i !== (tmp_array.length - 1)) {
