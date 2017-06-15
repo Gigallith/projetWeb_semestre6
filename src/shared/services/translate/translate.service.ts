@@ -59,7 +59,7 @@ export class TranslateService {
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
 
-    const regexCountry = new RegExp('^[A-Za-z]{2}$');
+    const regexCountry = new RegExp("^[A-Za-z]{2}$");
 
     return (tmp_array.length > 3 && regexCountry.test(from) && regexCountry.test(to));
   }

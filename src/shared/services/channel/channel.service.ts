@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http, RequestOptions, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 
-import {ReplaySubject, Subscription} from "rxjs";
+import {ReplaySubject} from "rxjs/ReplaySubject";
 import {ChannelModel} from "../../models/ChannelModel";
 import {THREADPAGE, URLSERVER} from "../../constants/urls";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
@@ -10,12 +10,12 @@ import {MessageListComponent} from "../../../app/messages/message-list/message-l
  * Created by Enzo on 12/06/2017.
  */
 
+
 @Injectable()
 export class ChannelService {
 
-  private url: string;
-
   public static MAX_CHANNEL = 20;
+  private url: string;
 
   private finalTabList: ChannelModel[];
 
@@ -61,7 +61,7 @@ export class ChannelService {
   }
 
   private extractChannelAndGetChannels(response: Response, route: string) {
-    this.http.get(route).subscribe((response) => this.extractAndUpdateChannelList());
+    this.http.get(route).subscribe((newResponse) => this.extractAndUpdateChannelList());
 
     return new ChannelModel(
       response.json().id,

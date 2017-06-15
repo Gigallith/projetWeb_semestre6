@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {THREADPAGE} from "../../../shared/constants/urls";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {MessageListComponent} from "../../messages/message-list/message-list.component";
 
 @Component({
@@ -12,10 +12,13 @@ import {MessageListComponent} from "../../messages/message-list/message-list.com
 })
 export class ChannelListComponent implements OnInit {
 
-  public channelList: ChannelModel[];
-
-  private route: string;
   public static needToUpdate = false;
+  public channelList: ChannelModel[];
+  private route: string;
+
+  public static update() {
+    ChannelListComponent.needToUpdate = true;
+  }
 
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
@@ -42,8 +45,6 @@ export class ChannelListComponent implements OnInit {
   }
 
 
-  public static update() {
-    ChannelListComponent.needToUpdate = true;
-  }
+
 
 }

@@ -146,7 +146,7 @@ export class MessageService {
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
     const finalPath = this.url + route;
 
-    this.http.get(finalPath).subscribe((response) => this.extractAndUpdateMessageList(route));
+    this.http.get(finalPath).subscribe((newResponse) => this.extractAndUpdateMessageList(route));
 
     return new MessageModel(
       response.json().id,

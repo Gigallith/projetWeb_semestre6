@@ -2,7 +2,8 @@ import {Component, OnInit} from "@angular/core";
 
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/interval";
 
 @Component({
   selector: "app-message-list",
@@ -12,11 +13,17 @@ import {Observable} from "rxjs";
 export class MessageListComponent implements OnInit {
 
   public static needToUpdate = false;
-
-  public messageList: MessageModel[];
-  private route: string;
   public static channelID: number;
   public static max_page: number;
+  public messageList: MessageModel[];
+  private route: string;
+
+  static notifyChange(id: number) {
+    MessageListComponent.channelID = id;
+    MessageListComponent.max_page = 0;
+
+    MessageListComponent.needToUpdate = true;
+  }
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
@@ -53,10 +60,5 @@ export class MessageListComponent implements OnInit {
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
-  static notifyChange(id: number) {
-    MessageListComponent.channelID = id;
-    MessageListComponent.max_page = 0;
 
-    MessageListComponent.needToUpdate = true;
-  }
 }
