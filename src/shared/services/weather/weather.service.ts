@@ -24,6 +24,8 @@ export class WeatherService {
 
       this.sendWeatherRequest(tmp_array).subscribe((response) => {
 
+        const user_name  : string = message.from;
+
         let tmp_content = "Voici la météo de " + response.json().name + ": \n" +
           "Température : " + response.json().main.temp + "°C \n" +
             //"elles varient entre : " +response.json().main.temp_min + "°C et " + response.json().main.temp_max + "°C \n" +
@@ -37,7 +39,7 @@ export class WeatherService {
 
         messageService.sendMessage(path, tmp_message);
 
-        message.from = "";
+        message.from = user_name;
         message.content = "";
       });
     }

@@ -21,13 +21,16 @@ export class TranslateService {
     if (this.isCommandToTranslate(tmp_array)){
 
       this.sendTranslateRequest(tmp_array).subscribe((response) => {
+
+        const user_name  : string = message.from;
+
         let tmp_message = message;
         tmp_message.content = response.json().translationText;
         tmp_message.from = "translatebot";
 
         messageService.sendMessage(path, tmp_message);
 
-        message.from = "";
+        message.from = user_name;
         message.content = "";
       });
     }

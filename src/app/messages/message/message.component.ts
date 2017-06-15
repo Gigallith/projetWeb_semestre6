@@ -11,7 +11,6 @@ import {MessageModel} from "../../../shared/models/MessageModel";
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
-  private fb: boolean;
   private urlyb: string;
   private urlins: string;
   private urlImg: string;
