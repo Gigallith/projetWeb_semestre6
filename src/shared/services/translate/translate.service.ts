@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Http, Response} from "@angular/http";
 
 import {URLTRANSLATE} from "../../constants/urls";
 import {MessageService} from "../message/message.service";
@@ -56,10 +56,11 @@ export class TranslateService {
   }
 
   private isCommandToTranslate(tmp_array: string[]): boolean {
-
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
 
-    return (tmp_array.length > 3 && from.length === 2 && to.length === 2);
+    const regexCountry = new RegExp('^[A-Za-z]{2}$');
+
+    return (tmp_array.length > 3 && regexCountry.test(from) && regexCountry.test(to));
   }
 }
