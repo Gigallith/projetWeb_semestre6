@@ -24,7 +24,6 @@ export class TranslateService {
 
         const user_name  : string = message.from;
 
-        let tmp_message = message;
         const tmp_message = message;
         tmp_message.content = response.json().translationText;
         tmp_message.from = "translatebot";
