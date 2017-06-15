@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { MessageService } from "../../../shared/services";
-import { MessageModel } from "../../../shared/models/MessageModel";
+import {MessageService} from "../../../shared/services";
+import {MessageModel} from "../../../shared/models/MessageModel";
 import {Observable} from "rxjs";
 
 @Component({
@@ -11,18 +11,18 @@ import {Observable} from "rxjs";
 })
 export class MessageListComponent implements OnInit {
 
-  public static needToUpdate : boolean = false;
+  public static needToUpdate: boolean = false;
 
   public messageList: MessageModel[];
   private route: string;
   public static channelID: number;
-  public static max_page : number;
+  public static max_page: number;
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
     MessageListComponent.max_page = 0;
     Observable.interval(1000)
-      .subscribe( () => {
+      .subscribe(() => {
         if (MessageListComponent.needToUpdate) {
           this.updateList();
 
@@ -40,14 +40,15 @@ export class MessageListComponent implements OnInit {
    * En general, l'utilisation des services dans le NgOnInit est une bonne practice. Le constructeur ne doit servir qu'à
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
-  private loadMoreMessages(){
+  private loadMoreMessages() {
     MessageListComponent.max_page = MessageListComponent.max_page + 1;
     this.updateList();
   }
 
-  private updateList(){
+  private updateList() {
     this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }

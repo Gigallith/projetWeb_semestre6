@@ -19,7 +19,7 @@ export class MessageService {
    */
   private url: string;
 
-  private finalTabList : MessageModel[];
+  private finalTabList: MessageModel[];
 
   /**
    * MessageList$ est un type d'Observable particulier appelé ReplaySubject.
@@ -37,7 +37,7 @@ export class MessageService {
     this.finalTabList = [];
   }
 
-  private resetTab(){
+  private resetTab() {
     this.finalTabList = [];
   }
 
@@ -53,15 +53,14 @@ export class MessageService {
    * @param max_num
    * @returns {Observable<R>}
    */
-  public getMessages(route: string, index : number, max_num : number) {
+  public getMessages(route: string, index: number, max_num: number) {
 
     this.extractMessagesByPage(route, index).subscribe(
-      (response) =>
-      {
+      (response) => {
         this.finalTabList = this.finalTabList.concat(response.json());
 
-        if (index < max_num){
-          let tmp = index + 1;
+        if (index < max_num) {
+          const tmp = index + 1;
           this.getMessages(route, tmp, max_num);
         } else {
 
@@ -81,7 +80,7 @@ export class MessageService {
     );
   }
 
-  private extractMessagesByPage(route: string, pageNum : number) : Observable<Response>{
+  private extractMessagesByPage(route: string, pageNum: number): Observable<Response> {
     const finalUrl = this.url + route + THREADPAGE + pageNum;
 
     return this.http.get(finalUrl);
@@ -100,20 +99,20 @@ export class MessageService {
    * @param date
    */
   public sendMessage(route: string, message: MessageModel, date?: Date) {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({"Content-Type": "application/json"});
+    const options = new RequestOptions({headers: headers});
 
-    let body = {
+    const body = {
       "content": message.content,
       "from": message.from,
-      "scheduledAt" : ""
+      "scheduledAt": ""
     };
 
-    if (date != null){
+    if (date != null) {
       body["scheduledAt"] = date.toISOString();
     }
 
-    let finalPath = this.url + route;
+    const finalPath = this.url + route;
 
     this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
 
@@ -127,10 +126,10 @@ export class MessageService {
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
    * @param route
    */
-  extractAndUpdateMessageList(route : string) {
+  extractAndUpdateMessageList(route: string) {
     this.resetTab();
 
-    this.getMessages(route , 0, MessageListComponent.max_page);
+    this.getMessages(route, 0, MessageListComponent.max_page);
   }
 
   /**
@@ -144,7 +143,7 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    let finalPath = this.url + route;
+    const finalPath = this.url + route;
 
     this.http.get(finalPath).subscribe((response) => this.extractAndUpdateMessageList(route));
 

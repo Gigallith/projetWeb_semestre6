@@ -37,7 +37,6 @@ export class MessageComponent implements OnInit {
     if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlyb = this.message.content.substr(strposition).split(" ")[0];
-      //if (strposition >= 0 && this.urlyb.indexOf("youtube") >= 0) {
       this.urlyb = this.urlyb.replace("watch?v=", "embed/");
       return true;
     } else {
@@ -51,16 +50,15 @@ export class MessageComponent implements OnInit {
     if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlins = this.message.content.substr(strposition).split(" ")[0];
-      if (this.urlins.includes("?")) {
+      if (this.urlins.includes("?") || this.urlins.charAt((this.urlins.length) - 1) === "/") {
         const slashposition = this.urlins.lastIndexOf("/");
-        this.urlins = this.urlins.substring(0, slashposition);
+        this.urlins = this.urlins.substring(0, slashposition); }
         this.urlins += "/embed";
         return true;
       } else {
         return false;
       }
     }
-  }
 
   checkImg(): boolean {
     if (this.message.content != null) {
