@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Response, Headers } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import {Injectable} from "@angular/core";
+import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 import {ReplaySubject, Subscription} from "rxjs";
 import {ChannelModel} from "../../models/ChannelModel";
@@ -17,7 +17,7 @@ export class ChannelService {
 
   public static MAX_CHANNEL = 20;
 
-  private finalTabList : ChannelModel[];
+  private finalTabList: ChannelModel[];
 
   public channelList$: ReplaySubject<ChannelModel[]>;
 
@@ -28,18 +28,17 @@ export class ChannelService {
     this.finalTabList = [];
   }
 
-  private resetTab(){
+  private resetTab() {
     this.finalTabList = [];
   }
 
-  public getChannels(route: string, pageNum : number){
+  public getChannels(route: string, pageNum: number) {
 
-    this.extractChannelByPage(route, pageNum).subscribe((response) =>
-      {
+    this.extractChannelByPage(route, pageNum).subscribe((response) => {
         this.finalTabList = this.finalTabList.concat(response.json());
 
-        if (response.json().length == ChannelService.MAX_CHANNEL){
-          let tmp = pageNum + 1;
+        if (response.json().length === ChannelService.MAX_CHANNEL) {
+          const tmp = pageNum + 1;
           this.getChannels(route, tmp);
         } else {
           this.channelList$.next(this.finalTabList);
@@ -49,7 +48,7 @@ export class ChannelService {
     );
   }
 
-  private extractChannelByPage(route: string, pageNum : number) : Observable<Response>{
+  private extractChannelByPage(route: string, pageNum: number): Observable<Response> {
     const finalUrl = this.url + route + pageNum;
 
     return this.http.get(finalUrl);
@@ -61,7 +60,7 @@ export class ChannelService {
     this.getChannels(THREADPAGE, 0);
   }
 
-  private extractChannelAndGetChannels(response : Response, route : string){
+  private extractChannelAndGetChannels(response: Response, route: string) {
     this.http.get(route).subscribe((response) => this.extractAndUpdateChannelList());
 
     return new ChannelModel(
@@ -73,26 +72,26 @@ export class ChannelService {
   }
 
   public createChannel(route: string, channel: ChannelModel) {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({"Content-Type": "application/json"});
+    const options = new RequestOptions({headers: headers});
 
-    let body = {
-      "name" : channel.name
+    const body = {
+      "name": channel.name
     };
 
-    let finalPath = this.url + route;
+    const finalPath = this.url + route;
 
     this.http.post(finalPath, body, options)
       .subscribe(
         (response) => this.extractChannelAndGetChannels(response, route)
-      ,(err) => {
-          if (err.status === 409){
+        , (err) => {
+          if (err.status === 409) {
             alert("The channel " + channel.name + " already exists");
           }
         });
   }
 
-  public selectFirstChannel() : number{
+  public selectFirstChannel(): number {
 
     return this.finalTabList[0].id;
   }

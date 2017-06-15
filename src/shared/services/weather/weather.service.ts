@@ -24,6 +24,8 @@ export class WeatherService {
 
       this.sendWeatherRequest(tmp_array).subscribe((response) => {
 
+        let element = document.createElement("div");
+
         let tmp_content = "Voici la météo de " + response.json().name + ": \n" +
           "Temps : " + response.json().weather[0].description + "  ,\n" +
           "Température : " + response.json().main.temp + "°C, \n" +
