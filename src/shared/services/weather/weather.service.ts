@@ -25,9 +25,10 @@ export class WeatherService {
       this.sendWeatherRequest(tmp_array).subscribe((response) => {
 
         let tmp_content = "Voici la météo de " + response.json().name + ": \n" +
-          "Température : " + response.json().main.temp + "°C \n" +
+          "Temps : " + response.json().weather[0].description + "  ,\n" +
+          "Température : " + response.json().main.temp + "°C, \n" +
             //"elles varient entre : " +response.json().main.temp_min + "°C et " + response.json().main.temp_max + "°C \n" +
-          "Vent : " + response.json().wind.speed + "m/s \n" +
+          "Vent : " + response.json().wind.speed + "m/s, \n" +
           "Humidité : " + response.json().main.humidity + "% \n";
 
 
@@ -47,7 +48,7 @@ export class WeatherService {
     let cityName: string = tmp_array[1];
     cityName = cityName.replace(/" "/g,"");
 
-    let tmp_link: string = this.url + "data/2.5/weather?q=" + cityName + "&units=metric&appid=" + this.key;
+    let tmp_link: string = this.url + "data/2.5/weather?q=" + cityName + "&units=metric&lang=fr&appid=" + this.key;
     return this.http.get(tmp_link);
   }
 
