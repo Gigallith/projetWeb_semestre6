@@ -9,7 +9,7 @@ export class ScheduleService {
 
   private url: string;
 
-  private monthOffset: number = 1;
+  private monthOffset = 1;
 
   constructor() {
     this.url = URLSERVER;
@@ -52,18 +52,18 @@ export class ScheduleService {
     const day_date: string = tmp_array[2];
     const hour_date: string = tmp_array[3];
 
-    return (tmp_array.length >= 5 && day_date.length == 10 && hour_date.length == 8);
+    return (tmp_array.length >= 5 && day_date.length === 10 && hour_date.length === 8);
 
   }
 
   private extractMessage(tmp_array: string[]): string {
 
-    let translateText: string = "";
+    let translateText = "";
 
     for (let i = 4; i < tmp_array.length; i++) {
       translateText = translateText + tmp_array[i];
 
-      if (i != (tmp_array.length - 1)) {
+      if (i !== (tmp_array.length - 1)) {
         translateText = translateText + " ";
       }
     }

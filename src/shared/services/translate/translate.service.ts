@@ -22,7 +22,7 @@ export class TranslateService {
 
       this.sendTranslateRequest(tmp_array).subscribe((response) => {
 
-        const user_name  : string = message.from;
+        const user_name: string = message.from;
 
         const tmp_message = message;
         tmp_message.content = response.json().translationText;
@@ -39,13 +39,13 @@ export class TranslateService {
   private sendTranslateRequest(tmp_array: string[]): Observable<Response> {
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
-    let translateText: string = "";
+    let translateText = "";
 
     for (let i = 3; i < tmp_array.length; i++) {
       tmp_array[i] = tmp_array[i].replace(",", "%2C");
       translateText = translateText + tmp_array[i];
 
-      if (i != (tmp_array.length - 1)) {
+      if (i !== (tmp_array.length - 1)) {
         translateText = translateText + "%20";
       }
     }
@@ -60,6 +60,6 @@ export class TranslateService {
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
 
-    return (tmp_array.length > 3 && from.length == 2 && to.length == 2);
+    return (tmp_array.length > 3 && from.length === 2 && to.length === 2);
   }
 }

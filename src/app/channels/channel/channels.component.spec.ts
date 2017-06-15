@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ChannelsComponent } from './channels.component';
+import { ChannelsComponent } from "./channels.component";
 
 describe("ChannelsComponent", () => {
   let component: ChannelsComponent;
@@ -19,7 +19,7 @@ describe("ChannelsComponent", () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

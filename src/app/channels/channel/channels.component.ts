@@ -1,23 +1,24 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {MessageListComponent} from "app/messages";
 
 @Component({
-  selector: 'app-channels',
-  templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.css']
+  selector: "app-channels",
+  templateUrl: "./channels.component.html",
+  styleUrls: ["./channels.component.css"]
 })
 export class ChannelsComponent implements OnInit {
 
-  @Input() channel : ChannelModel;
+  @Input() channel: ChannelModel;
 
   constructor() {
     this.channel = new ChannelModel(0);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
-  switchChannel(){
+  switchChannel() {
     MessageListComponent.notifyChange(this.channel.id);
   }
 

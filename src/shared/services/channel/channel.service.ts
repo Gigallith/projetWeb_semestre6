@@ -68,7 +68,7 @@ export class ChannelService {
       response.json().name,
       response.json().createdAt,
       response.json().updatedAt
-    )
+    );
   }
 
   public createChannel(route: string, channel: ChannelModel) {

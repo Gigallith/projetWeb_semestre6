@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { ChannelFormComponent } from './channel-form.component';
+import {ChannelFormComponent} from "./channel-form.component";
 
-describe('ChannelFormComponent', () => {
+describe("ChannelFormComponent", () => {
   let component: ChannelFormComponent;
   let fixture: ComponentFixture<ChannelFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChannelFormComponent ]
+      declarations: [ChannelFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('ChannelFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

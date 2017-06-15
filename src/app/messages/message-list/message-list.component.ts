@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class MessageListComponent implements OnInit {
 
-  public static needToUpdate: boolean = false;
+  public static needToUpdate = false;
 
   public messageList: MessageModel[];
   private route: string;

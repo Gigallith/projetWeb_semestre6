@@ -17,13 +17,15 @@ export class MessageFormComponent implements OnInit {
   public message: MessageModel;
   private route: string;
 
-  constructor(private messageService: MessageService, private translateService: TranslateService, private weatherService: WeatherService, private schedulerService : ScheduleService) {
+  constructor(private messageService: MessageService, private translateService: TranslateService,
+              private weatherService: WeatherService, private schedulerService: ScheduleService) {
     this.message = new MessageModel(1, "", "");
     this.route = "/messages";
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * Fonction pour envoyer un message.
@@ -32,7 +34,7 @@ export class MessageFormComponent implements OnInit {
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
    */
   sendMessage() {
-    let tmp_array = this.message.content.split(" ")[0];
+    const tmp_array = this.message.content.split(" ")[0];
 
     switch (tmp_array) {
       case "/trad":
