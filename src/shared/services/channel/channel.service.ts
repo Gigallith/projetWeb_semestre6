@@ -50,7 +50,7 @@ export class ChannelService {
   public getChannels(route: string, pageNum: number) {
 
     this.extractChannelByPage(route, pageNum).subscribe((response) => {
-        this.finalTabList = this.finalTabList.concat(response.json());
+        this.finalTabList = response.json();
 
         this.channelList$.next(this.finalTabList);
       }

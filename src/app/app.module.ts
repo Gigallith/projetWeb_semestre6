@@ -30,7 +30,7 @@ import {ChannelPagingComponent} from "./channels/channel-paging/channel-paging.c
     ChannelFormComponent,
     ChannelPagingComponent,
     SafeResourceUrl,
-    ChannelPagingComponent
+    ChannelPagingComponent,
   ],
   imports: [
     BrowserModule,
