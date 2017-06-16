@@ -1,9 +1,42 @@
 
+.channel-paging {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+}
 
 #prevChannelButton {
-  size: 50px;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 1em 0 2em 0;
+  flex: 0.5;
+  margin-right: 20%;
 }
 
 #nextChannelButton {
-  size: 50px
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 1em 0 2em 0;
+  flex: 0.5;
+
+}
+
+.btn-primary {
+  background: #747474;
+
+}
+
+.btn-primary:hover {
+  background-color: rgba(116, 116, 116, 0.68);
+}
+
+.btn-primary:active {
+  background-color: rgba(116, 116, 116, 0.33);
 }
