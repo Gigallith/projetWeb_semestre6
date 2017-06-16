@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
-import {MessageListComponent} from "app/messages";
 import {MessageService} from "../../../shared/services/message/message.service";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 

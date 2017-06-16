@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import {ChannelService} from "../shared/services/channel/channel.service";
 
 @Component({
   selector: "app-root",
@@ -9,14 +8,11 @@ import {ChannelService} from "../shared/services/channel/channel.service";
 })
 export class AppComponent {
 
-  title: String = "Chat";
+  public title: string;
   public title2: string;
 
-  constructor(private channelservice: ChannelService) {
-    this.channelservice.titre$.subscribe(titre => {
-      this.title = titre;
-    }, error => {
-      console.log("error: " + error); });
+  constructor() {
+    this.title = "Chat";
     this.title2 = "Channels";
     Observable.create();
   }
