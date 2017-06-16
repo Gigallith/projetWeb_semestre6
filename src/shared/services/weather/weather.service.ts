@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Http, Response} from "@angular/http";
 
-import {URLTRANSLATE, URLWEATHER, WEATHERKEY} from "../../constants/urls";
+import {URLWEATHER, WEATHERKEY} from "../../constants/urls";
 import {MessageService} from "../message/message.service";
 import {MessageModel} from "../../models/MessageModel";
 
@@ -18,10 +18,11 @@ export class WeatherService {
   }
 
   /**
-   * Fonction sendWeather
-   * Génère le message donnant la météo et envoie un message pour l'afficher dans le chat
-   * @param message
-   * @param path
+   * Method called when the user entered a message starting by "/meteo". It will test the command and
+   * display the weather if the command is well formatted
+   *
+   * @param message the message the user entered
+   * @param path the extension to send the request to the correct URL
    */
   public sendWeather(message: MessageModel, path: string) {
     const tmp_array = message.content.split(" ");
@@ -31,8 +32,6 @@ export class WeatherService {
       this.sendWeatherRequest(tmp_array).subscribe((response) => {
 
         const user_name: string = message.from;
-
-        // let element = document.createElement("div");
 
         const tmp_content = "Voici la météo de " + response.json().name + ": \n" +
           "Temps : " + response.json().weather[0].description + "  ,\n" +
@@ -54,10 +53,10 @@ export class WeatherService {
   }
 
   /**
-   * Fonction sendWeatherRequest
-   * Génére l'url du json qui contient les info de la météo
-   * @param tmp_array
-   * @returns {Observable<Response>}
+   * Method used when the command is valid. It will send a request to the needed API and returns the response received
+   *
+   * @param tmp_array the different part of the command entered
+   * @returns {Observable<Response>} the response sent by the API after the GET request
    */
   private sendWeatherRequest(tmp_array: string[]): Observable<Response> {
     let cityName: string = tmp_array[1];
@@ -68,10 +67,10 @@ export class WeatherService {
   }
 
   /**
-   * Fonction isCommandToWeather
-   * Permet de s'assurer que la comande pour la météo posséde un paramètre
-   * @param tmp_array
-   * @returns {boolean}
+   * Method used to check if the command entered is well formatted
+   *
+   * @param tmp_array the different part of the command entered
+   * @returns {boolean} returns true if the command is valid. false otherwise
    */
   private isCommandToWeather(tmp_array: string[]): boolean {
 
