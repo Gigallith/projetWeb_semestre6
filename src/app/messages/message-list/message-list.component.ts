@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
+import set = Reflect.set;
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/interval";
 
@@ -17,10 +18,6 @@ export class MessageListComponent implements OnInit {
 
   private route: string;
   private routeCount: string;
-
-  static notifyChange() {
-    MessageListComponent.max_page = 0;
-  }
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
@@ -53,10 +50,11 @@ export class MessageListComponent implements OnInit {
   }
 
   private updateList() {
-    this.messageService.checkIfUpdateNeeded(this.messageService.getChannelID() + this.route + this.routeCount);
-    //this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
+    this.messageService.extractAndUpdateMessageList(this.messageService.getChannelID() + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
-
+  trackByFn(index, message){
+    return message.id;
+  }
 }

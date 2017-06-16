@@ -61,9 +61,9 @@ export class MessageService {
   public getMessages(route: string, index: number, max_num: number) {
 
     this.extractMessagesByPage(route, index).subscribe(
-      (response) => {
-        this.finalTabList = this.finalTabList.concat(response.json());
-
+      (response) => this.finalTabList = this.finalTabList.concat(response.json()),
+      err => console.log(err),
+      () => {
         if (index < max_num) {
           const tmp = index + 1;
           this.getMessages(route, tmp, max_num);
@@ -114,7 +114,6 @@ export class MessageService {
     const finalPath = this.url + route;
 
     this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
-
   }
 
   /**
@@ -125,27 +124,10 @@ export class MessageService {
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
    * @param route
    */
-  extractAndUpdateMessageList(route: string) {
+  public extractAndUpdateMessageList(route: string) {
     this.resetTab();
 
     this.getMessages(route, 0, MessageListComponent.max_page);
-  }
-
-  public checkIfUpdateNeeded(route: string){
-    const finalPath = this.url + route + COUNTAFTERPAGE + this.lastUpdate.toISOString();
-
-    this.http.get(finalPath).subscribe((response) =>
-    {
-      const nbMessage = response.json();
-
-      console.log("nb : " + nbMessage);
-    }
-    );
-  }
-
-  public getXNewMessages(numberMessage : number, route : string){
-    const finalPath = this.url + route; + THREADPAGE ;
-
   }
 
   /**
