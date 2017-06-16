@@ -25,7 +25,13 @@ export class ChannelFormComponent implements OnInit {
    */
   createChannel() {
     this.channelService.createChannel(this.route, this.channel);
+    this.resetFields();
   }
 
-
+  /**
+   * Method used to clear the message field after the user send a message
+   */
+  private resetFields() {
+    this.channel.name= "";
+  }
 }
