@@ -1,3 +1,7 @@
+.container {
+  padding: 0;
+}
+
 .bottom {
   display: flex;
   width: 100%;
@@ -12,8 +16,12 @@
   padding: 12px 20px;
 }
 
-.btn-primary:active {
+.btn-primary:hover {
   background-color: #49b3f6;
+}
+
+.btn-primary:active {
+  background-color: rgba(73, 179, 246, 0.61);
 }
 
 input::-webkit-input-placeholder {
@@ -31,6 +39,11 @@ input:focus::-webkit-input-placeholder {
   margin: 5px 0;
   padding: 12px 20px;
   color: #FFFFFF;
+}
+
+.form-control:hover {
+  background: #49b3f6;
+
 }
 
 #user {
