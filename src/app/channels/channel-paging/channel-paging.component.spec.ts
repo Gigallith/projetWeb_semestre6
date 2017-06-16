@@ -10,7 +10,7 @@ describe("ChannelPagingComponent", () => {
     TestBed.configureTestingModule({
       declarations: [ ChannelPagingComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

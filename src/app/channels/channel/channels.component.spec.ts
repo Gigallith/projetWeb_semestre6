@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { ChannelsComponent } from "./channels.component";
+import {ChannelsComponent} from "./channels.component";
 
 describe("ChannelsComponent", () => {
   let component: ChannelsComponent;
@@ -10,7 +10,7 @@ describe("ChannelsComponent", () => {
     TestBed.configureTestingModule({
       declarations: [ ChannelsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

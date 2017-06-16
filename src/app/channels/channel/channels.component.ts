@@ -19,6 +19,10 @@ export class ChannelsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method used when the used click on a channel, to load the message contained in the wanted one
+   * and update every data related to this change
+   */
   switchChannel() {
     this.messageService.setChannelID(this.channel.id);
     this.channelservice.changeChatTitre(this.channel.name);

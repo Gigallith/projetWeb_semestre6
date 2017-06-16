@@ -1,8 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {THREADPAGE} from "../../../shared/constants/urls";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
-import {MessageService} from "../../../shared/services/message/message.service";
 
 @Component({
   selector: "app-channel-paging",
@@ -18,6 +16,9 @@ export class ChannelPagingComponent implements OnInit {
 
   }
 
+  /**
+   * Method used to switch to the previous channel page
+   */
   prevChannelPage() {
     if (this.channelService.getPagenum() !== 0) {
       this.channelService.decrPagenum();
@@ -25,6 +26,9 @@ export class ChannelPagingComponent implements OnInit {
     }
   }
 
+  /**
+   * Method used to switch to the next channel page
+   */
   nextChannelPage() {
     if (!this.channelService.isEmptyList()) {
       this.channelService.incrPagenum();
