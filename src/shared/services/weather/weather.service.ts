@@ -17,6 +17,12 @@ export class WeatherService {
     this.key = WEATHERKEY;
   }
 
+  /**
+   * Fonction sendWeather
+   * Génère le message donnant la météo et envoie un message pour l'afficher dans le chat
+   * @param message
+   * @param path
+   */
   public sendWeather(message: MessageModel, path: string) {
     const tmp_array = message.content.split(" ");
 
@@ -47,6 +53,12 @@ export class WeatherService {
     }
   }
 
+  /**
+   * Fonction sendWeatherRequest
+   * Génére l'url du json qui contient les info de la météo
+   * @param tmp_array
+   * @returns {Observable<Response>}
+   */
   private sendWeatherRequest(tmp_array: string[]): Observable<Response> {
     let cityName: string = tmp_array[1];
     cityName = cityName.replace(/" "/g, "");
@@ -55,6 +67,12 @@ export class WeatherService {
     return this.http.get(tmp_link);
   }
 
+  /**
+   * Fonction isCommandToWeather
+   * Permet de s'assurer que la comande pour la météo posséde un paramètre
+   * @param tmp_array
+   * @returns {boolean}
+   */
   private isCommandToWeather(tmp_array: string[]): boolean {
 
     return (tmp_array.length >= 2);
