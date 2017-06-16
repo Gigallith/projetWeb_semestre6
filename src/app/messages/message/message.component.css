@@ -1,4 +1,6 @@
-p {
+
+
+.container{
   color: black;
   border-radius: 10px;
   background-color: rgb(229, 229, 234);
@@ -6,4 +8,5 @@ p {
   padding-bottom: 5px;
   padding-left: 10px;
   max-width: 100%;
+  margin-bottom: 1em;
 }
