@@ -12,16 +12,21 @@
     </div>
 
     <!-- Channels drawer for mobile screens -->
-    <div class="col-sm-8 hidden-lg-up">
+    <div class="col-sm-4 hidden-lg-up">
       <input type="checkbox" name="menu" value="toggle" id="toggle">
       <section id="menu">
-        <label class="toggle" for="toggle"><i class="fa fa-2x fa-bars"></i></label>
+        <label class="toggle" for="toggle"></label>
         <nav class="menuContent">
           <span>Channels</span>
+          <div class="channel-header">
           <app-channel-form></app-channel-form>
+          </div>
           <nav class="channels">
             <app-channel-list></app-channel-list>
           </nav>
+          <div class="channel-footer">
+          <app-channel-paging></app-channel-paging>
+          </div>
         </nav>
       </section>
     </div>
