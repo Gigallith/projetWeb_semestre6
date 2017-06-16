@@ -7,6 +7,7 @@ import {ChannelModel} from "../../models/ChannelModel";
 import {THREADPAGE, URLSERVER} from "../../constants/urls";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 import {MessageService} from "../message/message.service";
+import {Subject} from "rxjs/Subject";
 /**
  * Created by Enzo on 12/06/2017.
  */
@@ -21,8 +22,10 @@ export class ChannelService {
   private finalTabList: ChannelModel[];
 
   public channelList$: ReplaySubject<ChannelModel[]>;
+  private channeltitre = new Subject<String>();
+  public titre$ = this.channeltitre.asObservable();
 
-  constructor(private http: Http, private messageService : MessageService) {
+  constructor(private http: Http, private messageService: MessageService) {
     this.url = URLSERVER;
     this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel(1)]);
@@ -94,5 +97,9 @@ export class ChannelService {
 
   public selectFirstChannel(): number {
     return this.finalTabList[0].id;
+  }
+
+  changeChatTitre(titre: String) {
+    this.channeltitre.next(titre);
   }
 }
