@@ -107,7 +107,7 @@ export class MessageComponent implements OnInit {
    */
   checkImg(): boolean {
     if (this.message.content != null) {
-      const regex = /^((http|https):\/\/)(www\.)[a-zA-Z-0-9.].+(.png|.jpeg|.jpg)$/;
+      const regex = /^((http|https):\/\/)(www\.)[a-zA-Z-0-9.\/].+(.png|.jpeg|.jpg)$/;
       const tabMessage = this.message.content.split(" ");
 
       for (let i = 0; i < tabMessage.length; i++) {
