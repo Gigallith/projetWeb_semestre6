@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {THREADPAGE} from "../../../shared/constants/urls";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {MessageService} from "../../../shared/services/message/message.service";
 
 @Component({
-  selector: 'app-channel-paging',
-  templateUrl: './channel-paging.component.html',
-  styleUrls: ['./channel-paging.component.css']
+  selector: "app-channel-paging",
+  templateUrl: "./channel-paging.component.html",
+  styleUrls: ["./channel-paging.component.css"]
 })
 export class ChannelPagingComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class ChannelPagingComponent implements OnInit {
   }
 
   prevChannelPage() {
-    if (this.channelService.getPagenum() != 0) {
+    if (this.channelService.getPagenum() !== 0) {
       this.channelService.decrPagenum();
       this.channelService.extractAndUpdateChannelList();
     }

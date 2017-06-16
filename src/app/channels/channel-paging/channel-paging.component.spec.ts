@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ChannelPagingComponent } from './channel-paging.component';
+import { ChannelPagingComponent } from "./channel-paging.component";
 
-describe('ChannelPagingComponent', () => {
+describe("ChannelPagingComponent", () => {
   let component: ChannelPagingComponent;
   let fixture: ComponentFixture<ChannelPagingComponent>;
 
@@ -19,7 +19,7 @@ describe('ChannelPagingComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -114,7 +114,6 @@ export class ChannelService {
   public getFirstChannel(route: string, pageNum: number) {
 
     this.extractChannelByPage(route, pageNum).subscribe((response) => {
-
         this.messageService.setChannelID(response.json()[0].id);
       }
     );
