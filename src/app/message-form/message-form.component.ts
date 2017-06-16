@@ -14,6 +14,7 @@ import {ScheduleService} from "../../shared/services/schedule/schedule.service";
 })
 export class MessageFormComponent implements OnInit {
 
+  public checkuser: boolean;
   public message: MessageModel;
   private route: string;
 
@@ -27,6 +28,7 @@ export class MessageFormComponent implements OnInit {
   ngOnInit() {
   }
 
+
   /**
    * Fonction pour envoyer un message.
    * L'envoi du message se fait à travers la methode sendMessage du service MessageService.
@@ -34,8 +36,8 @@ export class MessageFormComponent implements OnInit {
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
    */
   sendMessage() {
+    this.checkuser = true;
     const tmp_array = this.message.content.split(" ")[0];
-
     switch (tmp_array) {
       case "/trad":
         this.translateService.translateMessage(this.message, this.messageService.getChannelID() + this.route);
@@ -50,6 +52,12 @@ export class MessageFormComponent implements OnInit {
         this.messageService.sendMessage( this.messageService.getChannelID() + this.route, this.message);
         break;
     }
+
+
+    this.checkuser = /^[a-z]+$/g.exec(this.message.from) == null;
+    console.log(/[a-z]+/g.exec(this.message.from));
+    console.log( this.checkuser);
+
     this.resetFields();
   }
 
