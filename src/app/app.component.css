@@ -1,6 +1,12 @@
+html, body {
+  height: 100%;
+}
+
 .container-fluid {
-  height:100%;
+  position: fixed;
   display: flex;
+  height: 100vh;
+  margin: auto;
 }
 
 h1 {
@@ -11,50 +17,67 @@ h1 {
   justify-content: center;
   margin: auto;
   position: relative;
+  height: 90%;
   width: 85%;
-  height: 100%;
-}
-
-.card-header {
-  padding: 2em 2em 0 2em;
-  background: none;
-}
-
-.card-footer {
-  background: none;
 }
 
 .side {
+  display: flex;
+  flex-direction: column;
   padding: 2em;
   flex: 1;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  position: relative;
+  height: 100%;
 }
 
 .content {
-  flex: 2;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  flex: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  position: relative;
+  height: 100%;
 }
 
 #channels {
-  height: 1000px;
-  width: 90%;
+  flex: 12;
+  position: relative;
   overflow: hidden;
   overflow-y: scroll;
+  max-height: 90%;
+}
+
+.card-header {
+  flex: 1;
+  padding-top: 0;
+  background: none;
+  max-height: 80%;
 }
 
 #messages {
-  height: 1000px;
-  width: 90%;
+  position: relative;
   overflow: hidden;
   overflow-y: scroll;
+  max-height: 85%;
+  flex: 10;
+}
+
+.card-footer {
+  flex: 1;
+  position: relative;
+  background: none;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 767px) {
-  #channels {
-    height: 240px;
+  .side {
+    height: 33%;
   }
 
-  #messages {
-    height: 650px;
+
+  .content {
+    height: 67%;
   }
 }

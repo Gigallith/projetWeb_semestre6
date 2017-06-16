@@ -17,6 +17,7 @@ import {ScheduleService} from "../shared/services/schedule/schedule.service";
 import {WeatherService} from "../shared/services/weather/weather.service";
 import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
 
+
 @NgModule({
   declarations: [
     AppComponent,
