@@ -1,4 +1,4 @@
-
+<h1 >{{title}}</h1>
 <button (click)="loadMoreMessages()" class="btn btn-primary"> More messages </button>
 <div *ngFor="let currentMessage of messageList; trackBy: trackByFn">
   <!--CurrentMessage est le message courant dans la boucle -->
