@@ -83,13 +83,34 @@ export class MessageComponent implements OnInit {
   checkins(): boolean {
     const http_str = "https://www.instagram.com";
 
+    if (this.message.content != null){
+      const regex = /^((http|https):\/\/)(www.)(instagram.com|instagr.am)\/([A-Za-z0-9-_\/=&?]+)$/;
+      const tabMessage = this.message.content.split(" ");
+
+      for (let i = 0; i < tabMessage.length; i++){
+        if (tabMessage[i].match(regex)){
+          this.urlins = tabMessage[i];
+
+          if (!(this.urlins.slice(-1) === "/")){
+            this.urlins = this.urlins + "/";
+          }
+          this.urlins = this.urlins + "embed";
+
+          return true;
+        }
+      }
+      return false;
+    }
+
     if (this.message.content != null && this.message.content.includes(http_str)) {
       const strposition = this.message.content.indexOf(http_str);
       this.urlins = this.message.content.substr(strposition).split(" ")[0];
       if (this.urlins.includes("?") || this.urlins.charAt((this.urlins.length) - 1) === "/") {
         const slashposition = this.urlins.lastIndexOf("/");
-        this.urlins = this.urlins.substring(0, slashposition); }
+        this.urlins = this.urlins.substring(0, slashposition);
+      }
       this.urlins += "/embed";
+
       return true;
     } else {
       return false;
@@ -103,7 +124,7 @@ export class MessageComponent implements OnInit {
    */
   checkImg(): boolean {
     if (this.message.content != null) {
-      const regex = /^((http|https):\/\/)?(www\.)?[a-zA-Z-0-9.].+(.png|.jpeg|.jpg)$/;
+      const regex = /^((http|https):\/\/)(www\.)[a-zA-Z-0-9.].+(.png|.jpeg|.jpg)$/;
       const tabMessage = this.message.content.split(" ");
 
       for (let i = 0; i < tabMessage.length; i++){
@@ -124,13 +145,16 @@ export class MessageComponent implements OnInit {
    * @returns {boolean} return true if the message contains a tweet link. false otherwise
    */
   checktw(): boolean {
-    const http_str = "https://twitter.com";
-    if (this.message.content != null && this.message.content.includes(http_str)) {
-      const strposition = this.message.content.indexOf(http_str);
-      const url = this.message.content.substr(strposition).split(" ")[0];
-      this.urltw = "http://twitframe.com/show?url=" + url;
-      return true;
-    } else {
+    if (this.message.content != null) {
+      const regex = /^http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_\/]+)$/;
+      const tabMessage = this.message.content.split(" ");
+
+      for (let i = 0; i < tabMessage.length; i++) {
+        if (tabMessage[i].match(regex)) {
+          this.urltw = "http://twitframe.com/show?url=" + tabMessage[0];
+          return true;
+        }
+      }
       return false;
     }
   }

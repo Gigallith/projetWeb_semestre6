@@ -79,7 +79,6 @@ export class ChannelService {
 
   private extractChannelByPage(route: string, pageNum: number): Observable<Response> {
     const finalUrl = this.url + route + pageNum;
-    console.log(finalUrl);
     return this.http.get(finalUrl);
   }
 
