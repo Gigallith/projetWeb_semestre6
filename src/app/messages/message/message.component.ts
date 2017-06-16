@@ -85,7 +85,7 @@ export class MessageComponent implements OnInit {
 
       for (let i = 0; i < tabMessage.length; i++){
         if (tabMessage[i].match(regex)){
-          this.urlins = tabMessage[i];
+          this.urlins = tabMessage[i].split("?")[0];
 
           if (!(this.urlins.slice(-1) === "/")){
             this.urlins = this.urlins + "/";

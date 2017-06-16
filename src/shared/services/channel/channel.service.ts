@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {ChannelModel} from "../../models/ChannelModel";
 import {THREADPAGE, URLSERVER} from "../../constants/urls";
-import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 import {MessageService} from "../message/message.service";
 import {Subject} from "rxjs/Subject";
 /**
@@ -16,12 +15,10 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class ChannelService {
 
-  public static MAX_CHANNEL = 20;
   private url: string;
 
   private finalTabList: ChannelModel[];
   private pageNum: number;
-  private lastPage: number;
 
   public channelList$: ReplaySubject<ChannelModel[]>;
   private channeltitre = new Subject<String>();
@@ -49,10 +46,6 @@ export class ChannelService {
     return this.pageNum;
   }
 
-  public getLastPage(): number {
-    return this.lastPage;
-  }
-
   public isEmptyList(): boolean {
     return (this.finalTabList.length === 0);
   }
@@ -68,11 +61,6 @@ export class ChannelService {
         this.finalTabList = this.finalTabList.concat(response.json());
 
         this.channelList$.next(this.finalTabList);
-        // this.messageService.setChannelID(this.selectFirstChannel());
-
-        //if (this.finalTabList.length !== 0) {
-          //this.lastPage = pageNum;
-        //}
       }
     );
   }

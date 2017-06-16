@@ -3,7 +3,7 @@
          placeholder="Message">
   <div class="bottom">
     <input type="text" class="form-control" id="user" required [(ngModel)]="message.from" name="user"
-            placeholder="From">
+           placeholder="From">
     <button class="btn btn-primary" (click)="sendMessage()">Send</button>
   </div>
   <div *ngIf="checkuser" id="checkUser">

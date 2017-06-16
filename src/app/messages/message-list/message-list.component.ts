@@ -2,10 +2,10 @@ import {Component, OnInit} from "@angular/core";
 
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
-import set = Reflect.set;
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/interval";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
+import set = Reflect.set;
 
 @Component({
   selector: "app-message-list",
@@ -51,16 +51,28 @@ export class MessageListComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method we call whenever the user wants to retrieve the older messages on the current channel
+   */
   private loadMoreMessages() {
     MessageListComponent.max_page = MessageListComponent.max_page + 1;
     this.updateList();
   }
 
+  /**
+   * Method we call every X seconds to check if the thread contains new messages.
+   */
   private updateList() {
     this.messageService.extractAndUpdateMessageList(this.messageService.getChannelID() + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
+  /**
+   * Method that is used when we update the chat messages. If the message has been loaded already, it doesn't actualise it
+   *
+   * @param index the index of the message
+   * @param message the message we want to check if the app already loaded it.
+   */
   trackByFn(index, message) {
     return message.id;
   }

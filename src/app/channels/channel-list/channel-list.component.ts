@@ -12,24 +12,11 @@ import {MessageListComponent} from "../../messages/message-list/message-list.com
 })
 export class ChannelListComponent implements OnInit {
 
-  public static needToUpdate = false;
   public channelList: ChannelModel[];
   private route: string;
 
-  public static update() {
-    ChannelListComponent.needToUpdate = true;
-  }
-
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
-
-    Observable.interval(1000)
-      .subscribe(() => {
-        if (ChannelListComponent.needToUpdate) {
-          this.updateList();
-        }
-      });
-
   }
 
   private updateList() {
@@ -37,7 +24,6 @@ export class ChannelListComponent implements OnInit {
     this.channelService.channelList$.subscribe((channels) => {
       this.channelList = channels;
     });
-    ChannelListComponent.needToUpdate = false;
   }
 
 

@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 
 import {MessageService} from "../../shared/services";
 import {MessageModel} from "../../shared/models/MessageModel";
-import {MessageListComponent} from "../messages/message-list/message-list.component";
 import {TranslateService} from "../../shared/services/translate/translate.service";
 import {WeatherService} from "../../shared/services/weather/weather.service";
 import {ScheduleService} from "../../shared/services/schedule/schedule.service";
@@ -58,6 +57,9 @@ export class MessageFormComponent implements OnInit {
     this.resetFields();
   }
 
+  /**
+   * Method used to clear the message field after the user send a message
+   */
   private resetFields() {
     this.message.content = "";
   }
