@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 
 import {MessageModel} from "../../../shared/models/MessageModel";
-import {forEach} from "@angular/router/src/utils/collection";
-
 
 @Component({
   selector: "app-message",
@@ -75,14 +73,12 @@ export class MessageComponent implements OnInit {
 
 
   /**
-   * Method that test the content of a message and returns if it contains a link that refer to a instagram
-   * If it does, urltw is defined by link of instagram post
+   * Method that test the content of a message and returns if it contains a link that refer to a instagram post
+   * If it does, urltw is defined by the link of instagram post
    *
    * @returns {boolean} return true if the message contains a instagram link. false otherwise
    */
   checkins(): boolean {
-    const http_str = "https://www.instagram.com";
-
     if (this.message.content != null){
       const regex = /^((http|https):\/\/)(www.)(instagram.com|instagr.am)\/([A-Za-z0-9-_\/=&?]+)$/;
       const tabMessage = this.message.content.split(" ");
@@ -99,20 +95,6 @@ export class MessageComponent implements OnInit {
           return true;
         }
       }
-      return false;
-    }
-
-    if (this.message.content != null && this.message.content.includes(http_str)) {
-      const strposition = this.message.content.indexOf(http_str);
-      this.urlins = this.message.content.substr(strposition).split(" ")[0];
-      if (this.urlins.includes("?") || this.urlins.charAt((this.urlins.length) - 1) === "/") {
-        const slashposition = this.urlins.lastIndexOf("/");
-        this.urlins = this.urlins.substring(0, slashposition);
-      }
-      this.urlins += "/embed";
-
-      return true;
-    } else {
       return false;
     }
   }
@@ -141,7 +123,7 @@ export class MessageComponent implements OnInit {
   /**
    * Method that test the content of a message and returns if it contains a link that refer to a tweet
    * If it does, urltw is defined by link of twitter post
-   * 
+   *
    * @returns {boolean} return true if the message contains a tweet link. false otherwise
    */
   checktw(): boolean {
