@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 
 import {MessageModel} from "../../../shared/models/MessageModel";
+import {forEach} from "@angular/router/src/utils/collection";
 
 
 @Component({
@@ -31,18 +32,39 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkfb(): boolean {
-    const http_str = "https://www.youtube.com";
+  checkyt(): boolean {
 
-    if (this.message.content != null && this.message.content.includes(http_str)) {
-      const strposition = this.message.content.indexOf(http_str);
-      this.urlyb = this.message.content.substr(strposition).split(" ")[0];
-      this.urlyb = this.urlyb.replace("watch?v=", "embed/");
-      return true;
-    } else {
+    if (this.message.content != null) {
+      const regex = /^((http|https):\/\/)(www\.)(youtube\.com\/|youtu\.be\/)(v\/|watch\?v=|).+$/;
+      const tabMessage = this.message.content.split(" ");
+
+      for (let i = 0; i < tabMessage.length; i++){
+        if (tabMessage[i].match(regex)){
+          this.urlyb = tabMessage[i];
+
+          this.extractAndSetLink();
+
+          return true;
+        }
+      }
       return false;
     }
   }
+
+  extractAndSetLink(){
+    const smallLink = /^.*youtu\.be.*$/;
+    const mediumLink = /^.*\/v\/.*$/;
+    const largeLink = /^.*watch\?v=.*$/;
+
+    if (this.urlyb.match(mediumLink)){
+      this.urlyb = this.urlyb.replace("v/", "embed/");
+    } else if (this.urlyb.match(largeLink)){
+      this.urlyb = this.urlyb.replace("watch?v=", "embed/");
+    } else if (this.urlyb.match(smallLink)){
+      this.urlyb = this.urlyb.replace("youtu.be/", "youtube.com/embed/");
+    }
+  }
+
 
   checkins(): boolean {
     const http_str = "https://www.instagram.com";
@@ -53,27 +75,30 @@ export class MessageComponent implements OnInit {
       if (this.urlins.includes("?") || this.urlins.charAt((this.urlins.length) - 1) === "/") {
         const slashposition = this.urlins.lastIndexOf("/");
         this.urlins = this.urlins.substring(0, slashposition); }
-        this.urlins += "/embed";
-        return true;
-      } else {
-        return false;
-      }
+      this.urlins += "/embed";
+      return true;
+    } else {
+      return false;
     }
+  }
 
+  /**
+   * Method that test the content of a message and returns if it contains a link that refer to an image
+   *
+   * @returns {boolean} return true if the message contains an image url. false otherwise
+   */
   checkImg(): boolean {
     if (this.message.content != null) {
+      const regex = /^((http|https):\/\/)?(www\.)?[a-zA-Z-0-9.].+(.png|.jpeg|.jpg)$/;
+      const tabMessage = this.message.content.split(" ");
 
-      const strposition = this.message.content.indexOf("http");
-      this.urlImg = this.message.content.substr(strposition).split(" ")[0];
-      if (strposition >= 0 && this.urlImg.indexOf(".png") >= 0) {
-        return true;
-      } else if (strposition >= 0 && this.urlImg.indexOf(".jpeg") >= 0) {
-        return true;
-      } else if (strposition >= 0 && this.urlImg.indexOf(".jpg") >= 0) {
-        return true;
-      } else {
-        return false;
+      for (let i = 0; i < tabMessage.length; i++){
+        if (tabMessage[i].match(regex)){
+          this.urlImg = tabMessage[i];
+          return true;
+        }
       }
+      return false;
     }
   }
 

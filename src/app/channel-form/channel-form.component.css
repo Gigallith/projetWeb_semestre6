@@ -15,13 +15,17 @@
   background: #747474;
 }
 
-.form-control {
-  border: 1px solid #dedede;
-  border-radius: 25px;
+.btn-primary:hover {
+  background-color: rgba(116, 116, 116, 0.68);
 }
 
 .btn-primary:active {
-  background-color: #49b3f6;
+  background-color: rgba(116, 116, 116, 0.33);
+}
+
+.form-control {
+  border: 1px solid #dedede;
+  border-radius: 25px;
 }
 
 input:focus::-webkit-input-placeholder {

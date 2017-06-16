@@ -40,8 +40,11 @@ export class ChannelListComponent implements OnInit {
     ChannelListComponent.needToUpdate = false;
   }
 
+
+
   ngOnInit() {
     this.updateList();
+    this.channelService.getFirstChannel(THREADPAGE, 0);
   }
 
 

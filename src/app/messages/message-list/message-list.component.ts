@@ -5,6 +5,7 @@ import {MessageModel} from "../../../shared/models/MessageModel";
 import set = Reflect.set;
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/interval";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
 
 @Component({
   selector: "app-message-list",
@@ -18,8 +19,9 @@ export class MessageListComponent implements OnInit {
 
   private route: string;
   private routeCount: string;
+  title: String = "Chat";
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private channelservice: ChannelService) {
     this.route = "/messages";
     this.routeCount = "/count";
     MessageListComponent.max_page = 0;
@@ -30,6 +32,11 @@ export class MessageListComponent implements OnInit {
           this.updateList();
         }
       });
+
+    this.channelservice.titre$.subscribe(titre => {
+      this.title = titre;
+    }, error => {
+      console.log("error: " + error); });
   }
 
   /**
@@ -54,7 +61,7 @@ export class MessageListComponent implements OnInit {
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
-  trackByFn(index, message){
+  trackByFn(index, message) {
     return message.id;
   }
 }
