@@ -19,11 +19,11 @@ export class MessageService {
    */
   private url: string;
 
-  private channelID : number;
+  private channelID: number;
 
   private finalTabList: MessageModel[];
 
-  private lastUpdate : Date;
+  private lastUpdate: Date;
 
   /**
    * MessageList$ est un type d'Observable particulier appelé ReplaySubject.
@@ -101,7 +101,7 @@ export class MessageService {
     const options = new RequestOptions({headers: headers});
 
     const body = {
-      "id" : message.id,
+      "id": message.id,
       "content": message.content,
       "from": message.from,
       "scheduledAt": ""
@@ -166,11 +166,11 @@ export class MessageService {
     }
   }
 
-  public setChannelID(id : number){
+  public setChannelID(id: number) {
     this.channelID = id;
   }
 
-  public getChannelID() : number {
+  public getChannelID(): number {
     return this.channelID;
   }
 }

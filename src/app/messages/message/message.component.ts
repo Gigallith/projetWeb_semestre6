@@ -42,8 +42,8 @@ export class MessageComponent implements OnInit {
       const regex = /^((http|https):\/\/)(www\.)(youtube\.com\/|youtu\.be\/)(v\/|watch\?v=|).+$/;
       const tabMessage = this.message.content.split(" ");
 
-      for (let i = 0; i < tabMessage.length; i++){
-        if (tabMessage[i].match(regex)){
+      for (let i = 0; i < tabMessage.length; i++) {
+        if (tabMessage[i].match(regex)) {
           this.urlyb = tabMessage[i];
 
           this.extractAndSetLink();
@@ -54,19 +54,20 @@ export class MessageComponent implements OnInit {
       return false;
     }
   }
+
   /**
    * Convert youtube link source to a embed youtube link.
    */
-  extractAndSetLink(){
+  extractAndSetLink() {
     const smallLink = /^.*youtu\.be.*$/;
     const mediumLink = /^.*\/v\/.*$/;
     const largeLink = /^.*watch\?v=.*$/;
 
-    if (this.urlyb.match(mediumLink)){
+    if (this.urlyb.match(mediumLink)) {
       this.urlyb = this.urlyb.replace("v/", "embed/");
-    } else if (this.urlyb.match(largeLink)){
+    } else if (this.urlyb.match(largeLink)) {
       this.urlyb = this.urlyb.replace("watch?v=", "embed/");
-    } else if (this.urlyb.match(smallLink)){
+    } else if (this.urlyb.match(smallLink)) {
       this.urlyb = this.urlyb.replace("youtu.be/", "youtube.com/embed/");
     }
   }
@@ -79,15 +80,15 @@ export class MessageComponent implements OnInit {
    * @returns {boolean} return true if the message contains a instagram link. false otherwise
    */
   checkins(): boolean {
-    if (this.message.content != null){
+    if (this.message.content != null) {
       const regex = /^((http|https):\/\/)(www.)(instagram.com|instagr.am)\/([A-Za-z0-9-_\/=&?]+)$/;
       const tabMessage = this.message.content.split(" ");
 
-      for (let i = 0; i < tabMessage.length; i++){
-        if (tabMessage[i].match(regex)){
+      for (let i = 0; i < tabMessage.length; i++) {
+        if (tabMessage[i].match(regex)) {
           this.urlins = tabMessage[i];
 
-          if (!(this.urlins.slice(-1) === "/")){
+          if (!(this.urlins.slice(-1) === "/")) {
             this.urlins = this.urlins + "/";
           }
           this.urlins = this.urlins + "embed";
@@ -109,8 +110,8 @@ export class MessageComponent implements OnInit {
       const regex = /^((http|https):\/\/)(www\.)[a-zA-Z-0-9.].+(.png|.jpeg|.jpg)$/;
       const tabMessage = this.message.content.split(" ");
 
-      for (let i = 0; i < tabMessage.length; i++){
-        if (tabMessage[i].match(regex)){
+      for (let i = 0; i < tabMessage.length; i++) {
+        if (tabMessage[i].match(regex)) {
           this.urlImg = tabMessage[i];
           return true;
         }

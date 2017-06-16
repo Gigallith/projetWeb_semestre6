@@ -3,7 +3,7 @@ import {ChannelsComponent} from "./channels.component";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
-  declarations:  [
+  declarations: [
     ChannelsComponent
   ],
   imports: [
@@ -13,4 +13,5 @@ import {CommonModule} from "@angular/common";
   providers: []
 })
 
-export class ChannelModule { }
+export class ChannelModule {
+}

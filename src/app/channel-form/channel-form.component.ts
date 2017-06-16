@@ -23,7 +23,6 @@ export class ChannelFormComponent implements OnInit {
 
   createChannel() {
     this.channelService.createChannel(this.route, this.channel);
-
     ChannelListComponent.update();
   }
 

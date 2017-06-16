@@ -3,7 +3,6 @@ import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {THREADPAGE} from "../../../shared/constants/urls";
 import {Observable} from "rxjs/Observable";
-import {MessageListComponent} from "../../messages/message-list/message-list.component";
 
 @Component({
   selector: "app-channel-list",
@@ -22,14 +21,6 @@ export class ChannelListComponent implements OnInit {
 
   constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
-
-    Observable.interval(1000)
-      .subscribe(() => {
-        if (ChannelListComponent.needToUpdate) {
-          this.updateList();
-        }
-      });
-
   }
 
   private updateList() {

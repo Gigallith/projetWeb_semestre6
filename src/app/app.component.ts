@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import {Component} from "@angular/core";
+import {Observable} from "rxjs/Observable";
 import {ChannelService} from "../shared/services/channel/channel.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent {
   public title2: string;
 
   constructor() {
-    this.title="Chat";
+    this.title = "Chat";
     this.title2 = "Channels";
     Observable.create();
   }

@@ -68,11 +68,6 @@ export class ChannelService {
         this.finalTabList = this.finalTabList.concat(response.json());
 
         this.channelList$.next(this.finalTabList);
-        // this.messageService.setChannelID(this.selectFirstChannel());
-
-        //if (this.finalTabList.length !== 0) {
-          //this.lastPage = pageNum;
-        //}
       }
     );
   }
@@ -126,7 +121,6 @@ export class ChannelService {
   public getFirstChannel(route: string, pageNum: number) {
 
     this.extractChannelByPage(route, pageNum).subscribe((response) => {
-
         this.messageService.setChannelID(response.json()[0].id);
       }
     );
