@@ -11,37 +11,29 @@ import {MessageService} from "../../../shared/services/message/message.service";
 })
 export class ChannelPagingComponent implements OnInit {
 
-  public channelList: ChannelModel[];
   private route: string;
 
-  constructor(private channelService: ChannelService, private messageService: MessageService) {
+  constructor(private channelService: ChannelService) {
     this.route = THREADPAGE;
 
   }
 
   prevChannelPage() {
-     if (this.channelService.getPagenum() != 0) {
+    if (this.channelService.getPagenum() != 0) {
       this.channelService.decrPagenum();
       this.channelService.extractAndUpdateChannelList();
     }
   }
 
   nextChannelPage() {
+    if (!this.channelService.isEmptyList()) {
       this.channelService.incrPagenum();
       this.channelService.extractAndUpdateChannelList();
+    }
   }
 
-  updateList() {
-    this.channelService.extractAndUpdateChannelList();
-    this.channelService.channelList$.subscribe((channels) => {
-      this.channelList = channels;
-      this.messageService.setChannelID(channels[0].id);
-
-    });
-  }
 
   ngOnInit() {
-    this.updateList();
   }
 
 

@@ -53,6 +53,10 @@ export class ChannelService {
     return this.lastPage;
   }
 
+  public isEmptyList(): boolean {
+    return (this.finalTabList.length === 0);
+  }
+
 
   private resetTab() {
     this.finalTabList = [];
@@ -116,12 +120,16 @@ export class ChannelService {
         });
   }
 
-  public selectFirstChannel(): number {
-    return this.finalTabList[0].id;
-  }
-
   changeChatTitre(titre: String) {
     this.channeltitre.next(titre);
   }
 
+  public getFirstChannel(route: string, pageNum: number) {
+
+    this.extractChannelByPage(route, pageNum).subscribe((response) => {
+
+        this.messageService.setChannelID(response.json()[0].id);
+      }
+    );
+  }
 }
