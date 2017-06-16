@@ -1,18 +1,37 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 side">
+
+    <!-- Channels section for large and medium screens -->
+    <div class="col-md-4 side hidden-md-down">
       <h1> {{title2}} </h1>
       <app-channel-form></app-channel-form>
-      <nav id="channels">
+      <nav class="channels">
         <app-channel-list></app-channel-list>
       </nav>
       <app-channel-paging></app-channel-paging>
     </div>
-    <div class="col-md-8 content">
+
+    <!-- Channels drawer for mobile screens -->
+    <div class="col-sm-8 hidden-lg-up">
+      <input type="checkbox" name="menu" value="toggle" id="toggle">
+      <section id="menu">
+        <label class="toggle" for="toggle"><i class="fa fa-2x fa-bars"></i></label>
+        <nav class="menuContent">
+          <span>Channels</span>
+          <app-channel-form></app-channel-form>
+          <nav class="channels">
+            <app-channel-list></app-channel-list>
+          </nav>
+        </nav>
+      </section>
+    </div>
+
+    <!-- Chat section -->
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xm-12 content">
       <div class="card-header top">
         <h1> {{title}} </h1>
       </div>
-      <nav id="messages">
+      <nav class="messages">
         <app-message-list></app-message-list>
       </nav>
       <div class="card-footer form">
