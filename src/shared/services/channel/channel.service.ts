@@ -24,6 +24,8 @@ export class ChannelService {
   private lastPage: number;
 
   public channelList$: ReplaySubject<ChannelModel[]>;
+  private channeltitre = new Subject<String>();
+  public titre$ = this.channeltitre.asObservable();
 
   constructor(private http: Http, private messageService: MessageService) {
     this.url = URLSERVER;
@@ -116,6 +118,10 @@ export class ChannelService {
 
   public selectFirstChannel(): number {
     return this.finalTabList[0].id;
+  }
+
+  changeChatTitre(titre: String) {
+    this.channeltitre.next(titre);
   }
 
 }

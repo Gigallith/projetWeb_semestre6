@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {MessageService} from "../../../shared/services/message/message.service";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
 
 @Component({
   selector: "app-channels",
@@ -11,7 +12,7 @@ export class ChannelsComponent implements OnInit {
 
   @Input() channel: ChannelModel;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private channelservice: ChannelService) {
     this.channel = new ChannelModel(0);
   }
 
@@ -20,6 +21,7 @@ export class ChannelsComponent implements OnInit {
 
   switchChannel() {
     this.messageService.setChannelID(this.channel.id);
+    this.channelservice.changeChatTitre(this.channel.name);
   }
 
 }
