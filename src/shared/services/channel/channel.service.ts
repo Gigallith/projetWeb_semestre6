@@ -20,17 +20,37 @@ export class ChannelService {
   private url: string;
 
   private finalTabList: ChannelModel[];
+  private pageNum: number;
+  private lastPage: number;
 
   public channelList$: ReplaySubject<ChannelModel[]>;
-  private channeltitre = new Subject<String>();
-  public titre$ = this.channeltitre.asObservable();
 
   constructor(private http: Http, private messageService: MessageService) {
     this.url = URLSERVER;
     this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel(1)]);
     this.finalTabList = [];
+    this.pageNum = 0;
   }
+
+
+  public incrPagenum() {
+    this.pageNum = this.pageNum + 1;
+
+  }
+
+  public decrPagenum() {
+    this.pageNum = this.pageNum - 1;
+  }
+
+  public getPagenum(): number {
+    return this.pageNum;
+  }
+
+  public getLastPage(): number {
+    return this.lastPage;
+  }
+
 
   private resetTab() {
     this.finalTabList = [];
@@ -41,27 +61,26 @@ export class ChannelService {
     this.extractChannelByPage(route, pageNum).subscribe((response) => {
         this.finalTabList = this.finalTabList.concat(response.json());
 
-        if (response.json().length === ChannelService.MAX_CHANNEL) {
-          const tmp = pageNum + 1;
-          this.getChannels(route, tmp);
-        } else {
-          this.channelList$.next(this.finalTabList);
-          this.messageService.setChannelID(this.selectFirstChannel());
-        }
+        this.channelList$.next(this.finalTabList);
+        // this.messageService.setChannelID(this.selectFirstChannel());
+
+        //if (this.finalTabList.length !== 0) {
+          //this.lastPage = pageNum;
+        //}
       }
     );
   }
 
   private extractChannelByPage(route: string, pageNum: number): Observable<Response> {
     const finalUrl = this.url + route + pageNum;
-
+    console.log(finalUrl);
     return this.http.get(finalUrl);
   }
 
   extractAndUpdateChannelList() {
     this.resetTab();
 
-    this.getChannels(THREADPAGE, 0);
+    this.getChannels(THREADPAGE, this.pageNum);
   }
 
   private extractChannelAndGetChannels(response: Response, route: string) {
@@ -99,7 +118,4 @@ export class ChannelService {
     return this.finalTabList[0].id;
   }
 
-  changeChatTitre(titre: String) {
-    this.channeltitre.next(titre);
-  }
 }

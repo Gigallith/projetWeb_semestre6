@@ -16,6 +16,7 @@ import {TranslateService} from "../shared/services/translate/translate.service";
 import {ScheduleService} from "../shared/services/schedule/schedule.service";
 import {WeatherService} from "../shared/services/weather/weather.service";
 import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
+import { ChannelPagingComponent } from './channels/channel-paging/channel-paging.component';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import {SafeResourceUrl} from "../shared/pipes/SafeResourceUrl.pipe";
     ChannelsComponent,
     ChannelListComponent,
     ChannelFormComponent,
-    SafeResourceUrl
+    ChannelPagingComponent,
+    SafeResourceUrl,
+    ChannelPagingComponent
   ],
   imports: [
     BrowserModule,

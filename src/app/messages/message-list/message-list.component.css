@@ -1,19 +1,23 @@
 .btn-primary {
-  border: 6px solid #218bf5;
-  background: #fff;
-  color: #000;
-  padding: 10px 40px;
+  border: 0;
+  border-radius: 10px;
+  background: #218bf5;
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
   text-transform: uppercase;
   width: 100%;
-  margin: 0 0 2em 0;
+  margin: 1em 0 2em 0;
 }
 
 .btn-primary:hover {
-  background-color: white;
-  background: #218bf5;
-  color: #fff;
+  background-color: #49b3f6;
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  background-color: rgba(73, 179, 246, 0.61);
+  color: #ffffff;
 }
 h1 {
   text-align: center;
