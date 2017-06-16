@@ -28,10 +28,6 @@ export class MessageFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkUser() {
-    this.checkuser = false;
-  }
-
 
   /**
    * Fonction pour envoyer un message.
@@ -40,7 +36,7 @@ export class MessageFormComponent implements OnInit {
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
    */
   sendMessage() {
-    this.checkuser = false;
+    this.checkuser = true;
     const tmp_array = this.message.content.split(" ")[0];
     switch (tmp_array) {
       case "/trad":
@@ -57,7 +53,10 @@ export class MessageFormComponent implements OnInit {
         break;
     }
 
-    this.checkuser = /[a-z]+/g.exec(this.message.from) !== null;
+
+    this.checkuser = /^[a-z]+$/g.exec(this.message.from) == null;
+    console.log(/[a-z]+/g.exec(this.message.from));
+    console.log( this.checkuser);
 
     this.resetFields();
   }
