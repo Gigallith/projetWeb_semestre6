@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {MessageService} from "../../../shared/services/message/message.service";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
+import {MessageListComponent} from "../../messages/message-list/message-list.component";
 
 @Component({
   selector: "app-channels",
@@ -26,6 +27,7 @@ export class ChannelsComponent implements OnInit {
   switchChannel() {
     this.messageService.setChannelID(this.channel.id);
     this.channelservice.changeChatTitre(this.channel.name);
+    MessageListComponent.max_page = 0;
   }
 
 }
