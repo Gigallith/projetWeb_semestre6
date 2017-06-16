@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Http, RequestOptions, Response, Headers} from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {MessageModel} from "../../models/MessageModel";
 import {ReplaySubject} from "rxjs/ReplaySubject";
-import {COUNTAFTERPAGE, THREADPAGE, URLSERVER} from "shared/constants/urls";
+import {THREADPAGE, URLSERVER} from "shared/constants/urls";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 
 @Injectable()
@@ -42,6 +42,9 @@ export class MessageService {
     this.lastUpdate = new Date();
   }
 
+  /**
+   * Method used to reset the message list currently displayed
+   */
   private resetTab() {
     this.finalTabList = [];
   }
@@ -56,7 +59,7 @@ export class MessageService {
    * @param route
    * @param index
    * @param max_num
-   * @returns {Observable<R>}
+   * @returns {Observable<Response>}
    */
   public getMessages(route: string, index: number, max_num: number) {
 
@@ -78,6 +81,13 @@ export class MessageService {
     );
   }
 
+  /**
+   * Method used to get the messages from a specific page number (history of the channel)
+   *
+   * @param route the url extension to get the messages by page on the API
+   * @param pageNum the wanted page of the messages
+   * @returns {Observable<Response>} the response to the GET resquest sent by the API
+   */
   private extractMessagesByPage(route: string, pageNum: number): Observable<Response> {
     const finalUrl = this.url + route + THREADPAGE + pageNum;
 
@@ -151,6 +161,12 @@ export class MessageService {
       response.json().threadId);
   }
 
+
+  /**
+   * Method used to transform every specific characters pattern into the corresponding emoji
+   *
+   * @param messageList the currently displayed message list
+   */
   private emojiTransform(messageList) {
 
     for (let i = 0; i < messageList.length; i++) {
@@ -166,10 +182,18 @@ export class MessageService {
     }
   }
 
+  /**
+   * Channel ID setter
+   * @param id the wanted channel ID
+   */
   public setChannelID(id: number) {
     this.channelID = id;
   }
 
+  /**
+   * Channel ID getter
+   * @returns {number} the current channel ID
+   */
   public getChannelID(): number {
     return this.channelID;
   }
