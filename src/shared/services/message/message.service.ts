@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {MessageModel} from "../../models/MessageModel";
 import {ReplaySubject} from "rxjs/ReplaySubject";
-import {THREADPAGE, URLSERVER} from "shared/constants/urls";
+import {COUNTAFTERPAGE, THREADPAGE, URLSERVER} from "shared/constants/urls";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
 
 @Injectable()
@@ -19,7 +19,11 @@ export class MessageService {
    */
   private url: string;
 
+  private channelID : number;
+
   private finalTabList: MessageModel[];
+
+  private lastUpdate : Date;
 
   /**
    * MessageList$ est un type d'Observable particulier appelé ReplaySubject.
@@ -35,6 +39,7 @@ export class MessageService {
     this.messageList$ = new ReplaySubject(1);
     this.messageList$.next([new MessageModel()]);
     this.finalTabList = [];
+    this.lastUpdate = new Date();
   }
 
   private resetTab() {
@@ -63,19 +68,12 @@ export class MessageService {
           const tmp = index + 1;
           this.getMessages(route, tmp, max_num);
         } else {
-
           this.emojiTransform(this.finalTabList);
 
           this.finalTabList.reverse();
 
           this.messageList$.next(this.finalTabList);
-
-          // setTimeout(function() {
-          //   let element = document.getElementById('message');
-          //   element.scrollTop = element.scrollHeight;});
         }
-
-
       }
     );
   }
@@ -133,6 +131,23 @@ export class MessageService {
     this.getMessages(route, 0, MessageListComponent.max_page);
   }
 
+  public checkIfUpdateNeeded(route: string){
+    const finalPath = this.url + route + COUNTAFTERPAGE + this.lastUpdate.toISOString();
+
+    this.http.get(finalPath).subscribe((response) =>
+    {
+      const nbMessage = response.json();
+
+      console.log("nb : " + nbMessage);
+    }
+    );
+  }
+
+  public getXNewMessages(numberMessage : number, route : string){
+    const finalPath = this.url + route; + THREADPAGE ;
+
+  }
+
   /**
    * Fonction extractMessage.
    * Cette fonction permet d'extraire les données reçues à travers les requêtes HTTP. Elle est appelée dans la fonction
@@ -170,6 +185,14 @@ export class MessageService {
       messageList[i].content = messageList[i].content.replace(/:o/g, "😮");
       messageList[i].content = messageList[i].content.replace(/O_O/g, "😳");
     }
+  }
+
+  public setChannelID(id : number){
+    this.channelID = id;
+  }
+
+  public getChannelID() : number {
+    return this.channelID;
   }
 }
 

@@ -6,6 +6,7 @@ import {ReplaySubject} from "rxjs/ReplaySubject";
 import {ChannelModel} from "../../models/ChannelModel";
 import {THREADPAGE, URLSERVER} from "../../constants/urls";
 import {MessageListComponent} from "../../../app/messages/message-list/message-list.component";
+import {MessageService} from "../message/message.service";
 /**
  * Created by Enzo on 12/06/2017.
  */
@@ -21,7 +22,7 @@ export class ChannelService {
 
   public channelList$: ReplaySubject<ChannelModel[]>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private messageService : MessageService) {
     this.url = URLSERVER;
     this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel(1)]);
@@ -42,7 +43,7 @@ export class ChannelService {
           this.getChannels(route, tmp);
         } else {
           this.channelList$.next(this.finalTabList);
-          MessageListComponent.notifyChange(this.finalTabList[0].id);
+          this.messageService.setChannelID(this.selectFirstChannel());
         }
       }
     );

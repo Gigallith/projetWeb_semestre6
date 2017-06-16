@@ -11,29 +11,26 @@ import "rxjs/add/observable/interval";
   styleUrls: ["./message-list.component.css"]
 })
 export class MessageListComponent implements OnInit {
-
-  public static needToUpdate = false;
-  public static channelID: number;
   public static max_page: number;
+
   public messageList: MessageModel[];
+
   private route: string;
+  private routeCount: string;
 
-  static notifyChange(id: number) {
-    MessageListComponent.channelID = id;
+  static notifyChange() {
     MessageListComponent.max_page = 0;
-
-    MessageListComponent.needToUpdate = true;
   }
 
   constructor(private messageService: MessageService) {
     this.route = "/messages";
+    this.routeCount = "/count";
     MessageListComponent.max_page = 0;
+
     Observable.interval(1000)
       .subscribe(() => {
-        if (MessageListComponent.needToUpdate) {
+        if (this.messageService.getChannelID() != null) {
           this.updateList();
-
-          MessageListComponent.needToUpdate = false;
         }
       });
   }
@@ -56,7 +53,8 @@ export class MessageListComponent implements OnInit {
   }
 
   private updateList() {
-    this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
+    this.messageService.checkIfUpdateNeeded(this.messageService.getChannelID() + this.route + this.routeCount);
+    //this.messageService.extractAndUpdateMessageList(MessageListComponent.channelID + this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
 
