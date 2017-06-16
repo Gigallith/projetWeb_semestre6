@@ -93,7 +93,6 @@ export class ChannelService {
   }
 
   public selectFirstChannel(): number {
-
     return this.finalTabList[0].id;
   }
 }

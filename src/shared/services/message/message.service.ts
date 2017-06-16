@@ -113,7 +113,7 @@ export class MessageService {
 
     const finalPath = this.url + route;
 
-    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response, route));
+    this.http.post(finalPath, body, options).subscribe((response) => this.extractMessageAndGetMessages(response));
   }
 
   /**
@@ -140,10 +140,7 @@ export class MessageService {
    * @param route
    * @returns {any|{}}
    */
-  private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    const finalPath = this.url + route;
-
-    this.http.get(finalPath).subscribe((newResponse) => this.extractAndUpdateMessageList(route));
+  private extractMessageAndGetMessages(response: Response): MessageModel {
 
     return new MessageModel(
       response.json().id,

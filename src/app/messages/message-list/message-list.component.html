@@ -1,6 +1,6 @@
 
 <button (click)="loadMoreMessages()" class="btn btn-primary"> More messages </button>
-<div *ngFor="let currentMessage of messageList">
+<div *ngFor="let currentMessage of messageList; trackBy: trackByFn">
   <!--CurrentMessage est le message courant dans la boucle -->
   <!--On donne notre message courant en Input (en entrée, parametre) du composant Message qui va lui l'afficher.-->
   <app-message [message]="currentMessage"></app-message>

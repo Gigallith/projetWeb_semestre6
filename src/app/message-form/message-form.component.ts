@@ -53,10 +53,7 @@ export class MessageFormComponent implements OnInit {
         break;
     }
 
-
     this.checkuser = /^[a-z]+$/g.exec(this.message.from) == null;
-    console.log(/[a-z]+/g.exec(this.message.from));
-    console.log( this.checkuser);
 
     this.resetFields();
   }

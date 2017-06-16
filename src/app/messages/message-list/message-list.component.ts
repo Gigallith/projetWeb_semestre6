@@ -24,7 +24,7 @@ export class MessageListComponent implements OnInit {
     this.routeCount = "/count";
     MessageListComponent.max_page = 0;
 
-    Observable.interval(1000)
+    Observable.interval(1500)
       .subscribe(() => {
         if (this.messageService.getChannelID() != null) {
           this.updateList();
