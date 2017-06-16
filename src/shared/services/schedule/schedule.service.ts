@@ -12,7 +12,7 @@ export class ScheduleService {
 
   private monthOffset = 1;
 
-  constructor(private messageService : MessageService) {
+  constructor(private messageService: MessageService) {
     this.url = URLSERVER;
   }
 
@@ -77,7 +77,8 @@ export class ScheduleService {
     const day_date = tmp_array[2];
     const hour_date = tmp_array[3];
 
-    return (tmp_array.length >= ScheduleService.min_num_arg && regexRoom.test(room) && regexDay.test(day_date) && regexHour.test(hour_date));
+    return (tmp_array.length >= ScheduleService.min_num_arg && regexRoom.test(room) && regexDay.test(day_date)
+    && regexHour.test(hour_date));
   }
 
   /**
