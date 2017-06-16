@@ -84,8 +84,8 @@ export class MessageComponent implements OnInit {
       const regex = /^((http|https):\/\/)(www.)(instagram.com|instagr.am)\/([A-Za-z0-9-_\/=&?]+)$/;
       const tabMessage = this.message.content.split(" ");
 
-      for (let i = 0; i < tabMessage.length; i++){
-        if (tabMessage[i].match(regex)){
+      for (let i = 0; i < tabMessage.length; i++) {
+        if (tabMessage[i].match(regex)) {
           this.urlins = tabMessage[i].split("?")[0];
 
           if (!(this.urlins.slice(-1) === "/")) {
