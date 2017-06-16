@@ -15,6 +15,13 @@ export class TranslateService {
     this.url = URLTRANSLATE;
   }
 
+  /**
+   * Method called when the user entered a message starting by "/trad". It will test the command and
+   * do the translation if the command is well formatted
+   *
+   * @param message the message the user entered
+   * @param path the extension to send the request to the correct URL
+   */
   public translateMessage(message: MessageModel, path: string) {
     const tmp_array = message.content.split(" ");
 
@@ -36,6 +43,12 @@ export class TranslateService {
     }
   }
 
+  /**
+   * Method used when the command is valid. It will send a request to the needed API and returns the response received
+   *
+   * @param tmp_array the different part of the command entered
+   * @returns {Observable<Response>} the response sent by the API after the GET request
+   */
   private sendTranslateRequest(tmp_array: string[]): Observable<Response> {
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
@@ -55,6 +68,12 @@ export class TranslateService {
     return this.http.get(tmp_link);
   }
 
+  /**
+   * Method used to check if the command entered is well formatted
+   *
+   * @param tmp_array the different part of the command entered
+   * @returns {boolean} returns true if the command is valid. false otherwise
+   */
   private isCommandToTranslate(tmp_array: string[]): boolean {
     const from: string = tmp_array[1];
     const to: string = tmp_array[2];
