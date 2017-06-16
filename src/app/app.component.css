@@ -81,43 +81,57 @@ h1 {
 /* drawer */
 #menu {
   padding: 1em;
-  display:block;
+  display: flex;
   background-color: #f5f5f5;
-  width:256px;
-  min-height:100%;
-  top:0;
-  z-index:9999;
-  position:fixed;
-  box-shadow: 5px 0px 5px 0px rgba(0,0,0,0.25);
+  width: 256px;
+  height: 100vh;
+  top: 0;
+  z-index: 3;
+  position: fixed;
+  box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.25);
 }
 
 #menu .toggle {
-  top:40px;
-  left:256px;
-  padding:10px;
-  position:absolute;
-  background-color:#f5f5f5;
-  color:#fff;
-  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.25);
+  top: 40px;
+  left: 256px;
+  padding: 10px;
+  position: absolute;
+  background-color: #f5f5f5;
+  color: #fff;
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+#menu .channels {
+  max-width: calc(256px - 2em);
+}
+
+#menu .channel-header {
+  max-width: calc(256px - 2em);
+}
+
+#menu .channel-footer {
+  position: relative;
+  max-width: calc(256px - 2em);
+  bottom: 0;
 }
 
 #toggle {
-  display:none;
+  display: none;
 }
 
 #menu {
-  left:-256px;
-  transition:left 1s;
+  left: -256px;
+  transition: left 1s;
 }
+
 #toggle:checked + #menu {
-  left:0;
-  transition:left 1s;
+  left: 0;
+  transition: left 1s;
 }
 
 #menu span {
-  display:block;
-  font-size:22px;
-  margin:20px 10px;
-  background-color:#f5f5f5;
+  font-size: 22px;
+  margin: 20px 10px;
+  background-color: #f5f5f5;
 }
 

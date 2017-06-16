@@ -32,6 +32,12 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method that test the content of a message and returns if it contains a link that refer to a youtube video
+   * If it does, it calls method extractAndSetLink to define urlyb
+   *
+   * @returns {boolean} return true if the message contains a youtube viedo link. false otherwise
+   */
   checkyt(): boolean {
 
     if (this.message.content != null) {
@@ -50,7 +56,9 @@ export class MessageComponent implements OnInit {
       return false;
     }
   }
-
+  /**
+   * Convert youtube link source to a embed youtube link.
+   */
   extractAndSetLink(){
     const smallLink = /^.*youtu\.be.*$/;
     const mediumLink = /^.*\/v\/.*$/;
@@ -66,6 +74,12 @@ export class MessageComponent implements OnInit {
   }
 
 
+  /**
+   * Method that test the content of a message and returns if it contains a link that refer to a instagram
+   * If it does, urltw is defined by link of instagram post
+   *
+   * @returns {boolean} return true if the message contains a instagram link. false otherwise
+   */
   checkins(): boolean {
     const http_str = "https://www.instagram.com";
 
@@ -102,6 +116,13 @@ export class MessageComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Method that test the content of a message and returns if it contains a link that refer to a tweet
+   * If it does, urltw is defined by link of twitter post
+   * 
+   * @returns {boolean} return true if the message contains a tweet link. false otherwise
+   */
   checktw(): boolean {
     const http_str = "https://twitter.com";
     if (this.message.content != null && this.message.content.includes(http_str)) {
